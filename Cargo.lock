@@ -732,6 +732,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "marine-macro-testing-utils"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1c7b78534db4804dab7e439ae93fc2478bb298a97819bbc50002187ef02f2df5"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "marine-module-info-parser"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -849,6 +860,7 @@ dependencies = [
  "fluence-app-service",
  "itertools 0.10.1",
  "marine-it-parser",
+ "marine-macro-testing-utils",
  "proc-macro-error",
  "proc-macro2",
  "quote",
