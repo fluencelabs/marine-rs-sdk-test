@@ -18,7 +18,7 @@ jobs:
           rustup component add rustfmt
           rustup component add clippy
           cargo fmt --all -- --check --color always
-          (cd sdk-test; cargo build)
+          cargo build
           (cd crates/marine-test-macro-impl; cargo test)
 
           cargo test -v --all-features
