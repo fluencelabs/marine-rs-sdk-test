@@ -26,4 +26,4 @@ thiserror = "1.0.24"
 static_assertions = "1.1.0"
 
 [dev-dependencies]
-marine-macro-testing-utils = {path = "../macro-testing-utils"}
+marine-macro-testing-utils = "0.1.0"
