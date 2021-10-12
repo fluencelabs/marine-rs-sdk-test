@@ -34,7 +34,7 @@ pub fn marine_test_impl(
     let attrs: Vec<syn::NestedMeta> = attrs.into_iter().collect();
     let attrs = MTestAttributes::from_list(&attrs)?;
 
-    let func_item = syn::parse2::<syn::ItemFn>(input)?;
+    let item = syn::parse2::<syn::Item>(input)?;
 
-    generate_test_glue_code(func_item, attrs, file_path)
+    generate_test_glue_code(item, attrs, file_path)
 }

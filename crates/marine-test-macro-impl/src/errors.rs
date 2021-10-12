@@ -59,6 +59,9 @@ pub enum TestGeneratorError {
 
     #[error("No modules loaded for a service")]
     NoModulesInService,
+
+    #[error("Single-service macro cannot be applied to a mod")]
+    SingleServiceToAModUnsupported,
 }
 
 #[derive(Debug, ThisError)]

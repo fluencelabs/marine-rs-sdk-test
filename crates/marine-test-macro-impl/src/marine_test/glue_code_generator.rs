@@ -113,25 +113,30 @@ use std::collections::HashMap;
 ///      [(2), (3)] - module_ctors*
 ///      [(3), (4)] - original_block
 pub(super) fn generate_test_glue_code(
-    func_item: syn::ItemFn,
+    item: syn::Item,
     attrs: MTestAttributes,
     test_file_path: PathBuf,
 ) -> TResult<TokenStream> {
     match attrs {
         MTestAttributes::MultipleServices(services) => {
-            generate_test_glue_code_multiple_services(func_item, services, test_file_path)
+            generate_test_glue_code_multiple_services(item, services, test_file_path)
         }
         MTestAttributes::SingleService(service) => {
-            generate_test_glue_code_single_service(func_item, service, test_file_path)
+            generate_test_glue_code_single_service(item, service, test_file_path)
         }
     }
 }
 
 fn generate_test_glue_code_single_service(
-    func_item: syn::ItemFn,
+    item: syn::Item,
     service: ServiceDescription,
     test_file_path: PathBuf,
 ) -> TResult<TokenStream> {
+    let func_item = match item {
+        syn::Item::Fn(func_item) => func_item,
+        _ => return Err(TestGeneratorError::SingleServiceToAModUnsupported),
+    };
+
     let config_wrapper =
         config_utils::load_config(&service.config_path, service.modules_dir, &test_file_path)?;
     let modules_dir_test_relative = test_file_path.join(&config_wrapper.resolved_modules_dir);
@@ -185,23 +190,57 @@ fn generate_test_glue_code_single_service(
 }
 
 fn generate_test_glue_code_multiple_services(
-    func_item: syn::ItemFn,
+    item: syn::Item,
     services: HashMap<String, ServiceDescription>,
     test_file_path: PathBuf,
 ) -> TResult<TokenStream> {
     let service_definitions =
         token_stream_generator::generate_service_definitions(services, &test_file_path)?;
 
+    let marine_test_env = quote! {
+        pub mod marine_test_env {
+            #(#service_definitions)*
+        }
+    };
+
+    let glue_code = match item {
+        syn::Item::Fn(func_item) => wrap_fn_multiservice(func_item, marine_test_env),
+        syn::Item::Mod(mod_item) => wrap_mod_multiservice(mod_item, marine_test_env),
+        _ => return Err(TestGeneratorError::SingleServiceToAModUnsupported),
+    };
+
+    Ok(glue_code)
+}
+
+fn wrap_mod_multiservice(mod_item: syn::ItemMod, marine_test_env: TokenStream) -> TokenStream {
+    let mod_content = mod_item
+        .content
+        .map_or(TokenStream::default(), |(_, items)| {
+            quote! {#(#items)*}
+        });
+
+    let mod_ident = mod_item.ident;
+    let mod_vis = mod_item.vis;
+    let mod_attrib = mod_item.attrs;
+    quote! {
+        #(#mod_attrib)*
+        #mod_vis mod #mod_ident {
+            #marine_test_env
+
+            #mod_content
+        }
+    }
+}
+
+fn wrap_fn_multiservice(func_item: syn::ItemFn, marine_test_env: TokenStream) -> TokenStream {
     let original_block = func_item.block;
     let signature = func_item.sig;
     let name = &signature.ident;
-    let glue_code = quote! {
+    quote! {
         #[test]
         fn #name() {
             // definitions for services specified in attributes
-            pub mod marine_test_env {
-              #(#service_definitions)*
-            }
+            #marine_test_env
 
             fn test_func() {
                #original_block
@@ -209,9 +248,7 @@ fn generate_test_glue_code_multiple_services(
 
             test_func()
         }
-    };
-
-    Ok(glue_code)
+    }
 }
 
 fn generate_module_ctors<'inputs>(
