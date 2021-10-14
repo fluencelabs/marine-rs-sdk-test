@@ -31,6 +31,7 @@ pub use marine_test_macro::fce_test;
 
 pub use marine_build_rs_generator::generate_marine_test_env;
 pub use marine_build_rs_generator::ServiceDescription;
+pub use marine_build_rs_generator::include_test_env;
 
 pub use fluence_app_service::CallParameters;
 pub use fluence_app_service::SecurityTetraplet;
