@@ -20,7 +20,7 @@ use crate::marine_test::{config_utils, token_stream_generator};
 use crate::TestGeneratorError;
 use crate::TResult;
 
-use std::path::PathBuf;
+use std::path::{PathBuf, Path};
 
 use proc_macro2::TokenStream;
 use quote::quote;
@@ -162,6 +162,7 @@ fn generate_test_glue_code_single_service(
     let app_service_ctor = token_stream_generator::generate_app_service_ctor(
         &service.config_path,
         &config_wrapper.resolved_modules_dir,
+        &test_file_path,
     )?;
     let glue_code = quote! {
         #[test]
@@ -194,8 +195,11 @@ fn generate_test_glue_code_multiple_services(
     services: HashMap<String, ServiceDescription>,
     test_file_path: PathBuf,
 ) -> TResult<TokenStream> {
-    let service_definitions =
-        token_stream_generator::generate_service_definitions(services, &test_file_path)?;
+    let service_definitions = token_stream_generator::generate_service_definitions(
+        services,
+        &test_file_path,
+        &test_file_path,
+    )?;
 
     let marine_test_env = quote! {
         pub mod marine_test_env {
@@ -210,6 +214,27 @@ fn generate_test_glue_code_multiple_services(
     };
 
     Ok(glue_code)
+}
+
+pub(super) fn generate_marine_test_env_for_build_script(
+    services: HashMap<String, ServiceDescription>,
+    build_rs_file_path: &Path,
+) -> TResult<TokenStream> {
+    let current_file_path = PathBuf::from(".");
+    let service_definitions = token_stream_generator::generate_service_definitions(
+        services,
+        &current_file_path,
+        &build_rs_file_path,
+    )?;
+
+    let marine_test_env = quote! {
+        pub mod marine_test_env {
+            use marine_rs_sdk_test;
+            #(#service_definitions)*
+        }
+    };
+
+    Ok(marine_test_env)
 }
 
 fn wrap_mod_multiservice(mod_item: syn::ItemMod, marine_test_env: TokenStream) -> TokenStream {

@@ -22,6 +22,7 @@ trybuild = "1.0"
 
 [dependencies]
 marine-test-macro = { path = "crates/marine-test-macro", version = "=0.3.0" }
+marine-build-rs-generator = { path = "crates/marine-build-rs-generator", version = "=0.3.0" }
 fluence-app-service = { version = "0.9.0", features = ["raw-module-api"] }
 
 serde = { version = "1.0.118", features = ["derive"] }
@@ -32,4 +33,5 @@ uuid = { version = "0.8.2", features = ["v4"] }
 members = [
     "crates/marine-test-macro",
     "crates/marine-test-macro-impl",
+    "crates/marine-build-rs-generator",
     ]

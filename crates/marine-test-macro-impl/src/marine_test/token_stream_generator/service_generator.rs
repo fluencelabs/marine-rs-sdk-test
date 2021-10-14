@@ -32,6 +32,7 @@ use std::collections::HashMap;
 pub(crate) fn generate_service_definitions(
     services: HashMap<String, ServiceDescription>,
     file_path: &Path,
+    file_path_for_app_service: &Path,
 ) -> TResult<Vec<TokenStream>> {
     let services = services
         .into_iter()
@@ -58,6 +59,7 @@ pub(crate) fn generate_service_definitions(
                 &service,
                 file_path,
                 link_info.get::<str>(&service.name).unwrap(),
+                file_path_for_app_service,
             )
         })
         .collect::<TResult<Vec<TokenStream>>>()

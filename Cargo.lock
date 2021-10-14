@@ -662,6 +662,13 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3e2e65a1a2e43cfcb47a895c4c8b10d1f4a61097f9f254f183aee60cad9c651d"
 
 [[package]]
+name = "marine-build-rs-generator"
+version = "0.3.0"
+dependencies = [
+ "marine-test-macro-impl",
+]
+
+[[package]]
 name = "marine-it-generator"
 version = "0.5.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -804,6 +811,7 @@ name = "marine-rs-sdk-test"
 version = "0.3.0"
 dependencies = [
  "fluence-app-service",
+ "marine-build-rs-generator",
  "marine-test-macro",
  "serde",
  "serde_json",

@@ -15,10 +15,15 @@ use itertools::Itertools;
 pub(crate) fn generate_app_service_ctor(
     config_path: &str,
     modules_dir: &Path,
+    test_file_path: &Path,
 ) -> TResult<TokenStream> {
     let modules_dir = modules_dir
         .to_str()
         .ok_or_else(|| TestGeneratorError::InvalidUTF8Path(modules_dir.to_path_buf()))?;
+
+    let test_file_path = test_file_path
+        .to_str()
+        .ok_or_else(|| TestGeneratorError::InvalidUTF8Path(test_file_path.to_path_buf()))?;
 
     let service_ctor = quote! {
         let tmp_dir = std::env::temp_dir();
@@ -29,7 +34,7 @@ pub(crate) fn generate_app_service_ctor(
         std::fs::create_dir(&tmp_dir).expect("can't create a directory for service in tmp");
 
         let mut module_path = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"));
-        let mut file_path = std::path::Path::new(file!()).components();
+        let mut file_path = std::path::Path::new(#test_file_path).components();
 
         let mut truncated_file_path = Vec::new();
         loop {
@@ -53,8 +58,6 @@ pub(crate) fn generate_app_service_ctor(
             module_path.push(path);
         }
 
-        let _ = module_path.pop();
-
         let config_path = module_path.join(#config_path);
         let modules_dir = module_path.join(#modules_dir);
         let modules_dir = modules_dir.to_str().expect("modules_dir contains invalid UTF8 string");
@@ -77,6 +80,7 @@ pub(super) fn generate_service_definition(
     service: &ProcessedService,
     test_file_path: &Path,
     linked_facade: &LinkedModule<'_>,
+    file_path_for_app_service: &Path,
 ) -> TResult<TokenStream> {
     let modules_dir_test_relative = test_file_path.join(&service.config.resolved_modules_dir);
     let modules =
@@ -102,8 +106,11 @@ pub(super) fn generate_service_definition(
     let facade_override_ident = new_ident("__facade_override")?;
     let facade_structs = generate_facade_structs(facade, &facade_override_ident)?;
 
-    let app_service_ctor =
-        generate_app_service_ctor(&service.config_path, &service.config.resolved_modules_dir)?;
+    let app_service_ctor = generate_app_service_ctor(
+        &service.config_path,
+        &service.config.resolved_modules_dir,
+        file_path_for_app_service,
+    )?;
     let modules_type = generate_modules_type(&modules)?;
 
     let service_definition = quote! {

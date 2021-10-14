@@ -178,7 +178,7 @@ fn empty_test() {
                     std::fs::create_dir(&tmp_dir)
                         .expect("can't create a directory for service in tmp");
                     let mut module_path = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"));
-                    let mut file_path = std::path::Path::new(file!()).components();
+                    let mut file_path = std::path::Path::new("tests/generation_tests/multi-service-single").components();
                     let mut truncated_file_path = Vec::new();
                     loop {
                         if module_path.ends_with(file_path.as_path()) {
@@ -200,7 +200,6 @@ fn empty_test() {
                     for path in truncated_file_path.iter().rev() {
                         module_path.push(path);
                     }
-                    let _ = module_path.pop();
                     let config_path = module_path.join("empty_func/Config.toml");
                     let modules_dir = module_path.join("empty_func/artifacts");
                     let modules_dir = modules_dir

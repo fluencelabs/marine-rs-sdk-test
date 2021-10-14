@@ -25,13 +25,13 @@ pub(crate) enum MTestAttributes {
 }
 
 #[derive(Debug, Default, Clone, FromMeta)]
-pub(crate) struct ServiceDescription {
+pub struct ServiceDescription {
     /// Path to a config file of a tested service.
-    pub(crate) config_path: String,
+    pub config_path: String,
 
     /// Path to compiled modules of a service.
     #[darling(default)]
-    pub(crate) modules_dir: Option<String>,
+    pub modules_dir: Option<String>,
 }
 
 impl FromMeta for MTestAttributes {
