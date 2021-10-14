@@ -71,7 +71,6 @@ fn test() {
             }
             impl ModuleInterface {
                 pub fn download(&mut self, url: String) -> String {
-                    use std::ops::DerefMut;
                     let arguments = marine_rs_sdk_test::internal::serde_json::json!([url]);
                     let result = self
                         .marine
@@ -89,7 +88,6 @@ fn test() {
                     url: String,
                     cp: marine_rs_sdk_test::CallParameters
                 ) -> String {
-                    use std::ops::DerefMut;
                     let arguments = marine_rs_sdk_test::internal::serde_json::json!([url]);
                     let result = self
                         .marine

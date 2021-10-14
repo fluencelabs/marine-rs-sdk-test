@@ -70,7 +70,6 @@ fn empty_string() {
             }
             impl ModuleInterface {
                 pub fn greeting(&mut self, name: String) -> String {
-                    use std::ops::DerefMut;
                     let arguments = marine_rs_sdk_test::internal::serde_json::json!([name]);
                     let result = self
                         .marine
@@ -88,7 +87,6 @@ fn empty_string() {
                     name: String,
                     cp: marine_rs_sdk_test::CallParameters
                 ) -> String {
-                    use std::ops::DerefMut;
                     let arguments = marine_rs_sdk_test::internal::serde_json::json!([name]);
                     let result = self
                         .marine
@@ -120,7 +118,6 @@ fn empty_string() {
             }
             impl ModuleInterface {
                 pub fn call_parameters(&mut self, ) -> String {
-                    use std::ops::DerefMut;
                     let arguments = marine_rs_sdk_test::internal::serde_json::json!([]);
                     let result = self
                         .marine
@@ -142,7 +139,6 @@ fn empty_string() {
                     &mut self,
                     cp: marine_rs_sdk_test::CallParameters
                 ) -> String {
-                    use std::ops::DerefMut;
                     let arguments = marine_rs_sdk_test::internal::serde_json::json!([]);
                     let result = self
                         .marine
@@ -156,7 +152,6 @@ fn empty_string() {
                     result
                 }
                 pub fn return_string(&mut self,) -> String {
-                    use std::ops::DerefMut;
                     let arguments = marine_rs_sdk_test::internal::serde_json::json!([]);
                     let result = self
                         .marine
@@ -178,7 +173,6 @@ fn empty_string() {
                     &mut self,
                     cp: marine_rs_sdk_test::CallParameters
                 ) -> String {
-                    use std::ops::DerefMut;
                     let arguments = marine_rs_sdk_test::internal::serde_json::json!([]);
                     let result = self
                         .marine
@@ -192,7 +186,6 @@ fn empty_string() {
                     result
                 }
                 pub fn test_array_refs(&mut self, ) -> Vec<String> {
-                    use std::ops::DerefMut;
                     let arguments = marine_rs_sdk_test::internal::serde_json::json!([]);
                     let result = self
                         .marine
@@ -214,7 +207,6 @@ fn empty_string() {
                     &mut self,
                     cp: marine_rs_sdk_test::CallParameters
                 ) -> Vec<String> {
-                    use std::ops::DerefMut;
                     let arguments = marine_rs_sdk_test::internal::serde_json::json!([]);
                     let result = self
                         .marine
