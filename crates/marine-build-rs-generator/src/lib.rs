@@ -41,5 +41,7 @@ pub fn generate_marine_test_env(
 
 #[macro_export]
 macro_rules! include_test_env {
-    ($filename:expr) => { include!(concat!(env!("OUT_DIR"), $filename));}
+    ($filename:expr) => {
+        include!(concat!(env!("OUT_DIR"), $filename));
+    };
 }
