@@ -134,7 +134,7 @@ fn generate_test_glue_code_single_service(
 ) -> TResult<TokenStream> {
     let func_item = match item {
         syn::Item::Fn(func_item) => func_item,
-        _ => return Err(TestGeneratorError::SingleServiceToAModUnsupported),
+        _ => return Err(TestGeneratorError::ExpectedFn),
     };
 
     let config_wrapper =
@@ -210,7 +210,7 @@ fn generate_test_glue_code_multiple_services(
     let glue_code = match item {
         syn::Item::Fn(func_item) => wrap_fn_multiservice(func_item, marine_test_env),
         syn::Item::Mod(mod_item) => wrap_mod_multiservice(mod_item, marine_test_env),
-        _ => return Err(TestGeneratorError::SingleServiceToAModUnsupported),
+        _ => return Err(TestGeneratorError::ExpectedModOrFn),
     };
 
     Ok(glue_code)
