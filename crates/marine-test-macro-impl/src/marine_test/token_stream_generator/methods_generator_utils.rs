@@ -89,8 +89,6 @@ fn generate_marine_call(
     let ret = generate_ret(&output_type);
 
     let function_call = quote! {
-        use std::ops::DerefMut;
-
         #convert_arguments
 
         #set_result #function_call
