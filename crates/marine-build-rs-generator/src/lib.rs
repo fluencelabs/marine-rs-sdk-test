@@ -38,6 +38,8 @@ pub fn generate_marine_test_env(
     filename: &str,
     build_rs_file_path: &str,
 ) {
+    // build_rs_file_path expected to be obtained from file!() macro, which returns path with filename,
+    // but underlying code expects path without filename, so we are removing last part
     let mut build_rs_file_path = PathBuf::from(build_rs_file_path);
     let _ = build_rs_file_path.pop();
 
