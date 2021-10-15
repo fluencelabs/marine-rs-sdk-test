@@ -47,18 +47,12 @@ pub fn generate_marine_test_env(
                 .expect("cannot write marine_test_env: OUT_DIR env var must be set");
             let dest_path = Path::new(&out_dir).join(filename);
 
-            let result = fs::write(dest_path, stream.to_string());
-            if let Err(e) = result {
-                std::panic::panic_any(format!(
-                    "cannot write marine_test_env on disk: {}",
-                    e.to_string()
-                ));
+            match fs::write(dest_path, stream.to_string()) {
+                Ok(result) => result,
+                Err(e) => std::panic::panic_any(format!("cannot write marine_test_env on disk: {}", e))
             }
         }
-        Err(error) => std::panic::panic_any(format!(
-            "marine_test_env generation error: {}",
-            error.to_string()
-        )),
+        Err(error) => std::panic::panic_any(format!("marine_test_env generation error: {}", error)),
     }
 }
 
