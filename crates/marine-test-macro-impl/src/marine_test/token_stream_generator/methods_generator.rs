@@ -36,8 +36,7 @@ pub(super) fn generate_module_methods<'m, 'r>(
             Vec::with_capacity(methods_count),
             |mut methods, signature| {
                 let default_cp = generate_module_method(module_name, signature, Default, records)?;
-                let user_cp =
-                    generate_module_method(module_name, signature, UserDefined, records)?;
+                let user_cp = generate_module_method(module_name, signature, UserDefined, records)?;
 
                 methods.push(default_cp);
                 methods.push(user_cp);
