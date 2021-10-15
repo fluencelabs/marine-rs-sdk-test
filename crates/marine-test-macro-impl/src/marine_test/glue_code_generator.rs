@@ -26,7 +26,6 @@ use proc_macro2::TokenStream;
 use quote::quote;
 use quote::ToTokens;
 use syn::FnArg;
-use std::collections::HashMap;
 
 /// Generates glue code for tests.
 /// F.e. for this test for the greeting service
@@ -192,7 +191,7 @@ fn generate_test_glue_code_single_service(
 
 fn generate_test_glue_code_multiple_services(
     item: syn::Item,
-    services: HashMap<String, ServiceDescription>,
+    services: impl IntoIterator<Item = (String, ServiceDescription)>,
     test_file_path: PathBuf,
 ) -> TResult<TokenStream> {
     let service_definitions = token_stream_generator::generate_service_definitions(
@@ -217,7 +216,7 @@ fn generate_test_glue_code_multiple_services(
 }
 
 pub(super) fn generate_marine_test_env_for_build_script(
-    services: HashMap<String, ServiceDescription>,
+    services: impl IntoIterator<Item = (String, ServiceDescription)>,
     build_rs_file_path: &Path,
 ) -> TResult<TokenStream> {
     let current_file_path = PathBuf::from(".");

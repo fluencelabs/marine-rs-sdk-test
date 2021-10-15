@@ -28,22 +28,16 @@
 #![recursion_limit = "1024"]
 
 use marine_test_macro_impl::generate_marine_test_env_impl;
-use std::collections::HashMap;
 
 pub use marine_test_macro_impl::ServiceDescription;
 use std::path::{PathBuf, Path};
 use std::{fs, env};
 
 pub fn generate_marine_test_env(
-    services: &[(String, ServiceDescription)],
+    services: impl IntoIterator<Item = (String, ServiceDescription)>,
     filename: &str,
     build_rs_file_path: &str,
 ) {
-    let services = services
-        .iter()
-        .cloned()
-        .collect::<HashMap<String, ServiceDescription>>();
-
     let mut build_rs_file_path = PathBuf::from(build_rs_file_path);
     let _ = build_rs_file_path.pop();
 

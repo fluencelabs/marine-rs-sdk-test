@@ -27,10 +27,9 @@ use proc_macro2::TokenStream;
 use itertools::{Itertools, zip};
 
 use std::path::Path;
-use std::collections::HashMap;
 
 pub(crate) fn generate_service_definitions(
-    services: HashMap<String, ServiceDescription>,
+    services: impl IntoIterator<Item = (String, ServiceDescription)>,
     file_path: &Path,
     file_path_for_app_service: &Path,
 ) -> TResult<Vec<TokenStream>> {

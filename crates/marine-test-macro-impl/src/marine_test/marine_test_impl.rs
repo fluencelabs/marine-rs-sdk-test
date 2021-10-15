@@ -23,7 +23,6 @@ use proc_macro2::TokenStream;
 use darling::FromMeta;
 use syn::parse::Parser;
 use std::path::{PathBuf, Path};
-use std::collections::HashMap;
 
 pub fn marine_test_impl(
     attrs: TokenStream,
@@ -42,7 +41,7 @@ pub fn marine_test_impl(
 }
 
 pub fn generate_marine_test_env_impl(
-    services: HashMap<String, ServiceDescription>,
+    services: impl IntoIterator<Item = (String, ServiceDescription)>,
     build_rs_file_path: &Path,
 ) -> TResult<TokenStream> {
     generate_marine_test_env_for_build_script(services, build_rs_file_path)
