@@ -219,7 +219,7 @@ pub(super) fn generate_marine_test_env_for_build_script(
     services: impl IntoIterator<Item = (String, ServiceDescription)>,
     build_rs_file_path: &Path,
 ) -> TResult<TokenStream> {
-    let current_file_path = PathBuf::from(".");
+    let current_file_path = Path::new(".");
     let service_definitions = token_stream_generator::generate_service_definitions(
         services,
         &current_file_path,
