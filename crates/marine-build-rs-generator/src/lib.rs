@@ -49,7 +49,9 @@ pub fn generate_marine_test_env(
 
             match fs::write(dest_path, stream.to_string()) {
                 Ok(result) => result,
-                Err(e) => std::panic::panic_any(format!("cannot write marine_test_env on disk: {}", e))
+                Err(e) => {
+                    std::panic::panic_any(format!("cannot write marine_test_env on disk: {}", e))
+                }
             }
         }
         Err(error) => std::panic::panic_any(format!("marine_test_env generation error: {}", error)),
