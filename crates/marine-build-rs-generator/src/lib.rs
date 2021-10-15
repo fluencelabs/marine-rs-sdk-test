@@ -28,8 +28,8 @@
 #![recursion_limit = "1024"]
 
 use marine_test_macro_impl::generate_marine_test_env_impl;
-
 pub use marine_test_macro_impl::ServiceDescription;
+
 use std::path::{PathBuf, Path};
 use std::{fs, env};
 
