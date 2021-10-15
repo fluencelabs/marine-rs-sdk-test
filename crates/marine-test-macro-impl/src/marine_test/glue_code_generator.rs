@@ -222,8 +222,8 @@ pub(super) fn generate_marine_test_env_for_build_script(
     let current_file_path = Path::new(".");
     let service_definitions = token_stream_generator::generate_service_definitions(
         services,
-        &current_file_path,
-        &build_rs_file_path,
+        current_file_path,
+        build_rs_file_path,
     )?;
 
     let marine_test_env = quote! {

@@ -74,7 +74,7 @@ pub(super) fn generate_module_definitions<'i>(
                 linked_modules.get(&value.name).unwrap(),
                 module_import_generator,
             )?;
-            let module_ident = new_ident(&value.name)?;
+            let module_ident = new_ident(value.name)?;
             Ok(quote! {
                 pub mod #module_ident {
                     #content
