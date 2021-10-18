@@ -1,7 +1,7 @@
 ## Version 0.4.0 (2021-10-18)
 [PR 10](https://github.com/fluencelabs/marine-rs-sdk-test/pull/10):
-- multi-service `marine_test` can now be applied to a `mod` instead of an `fn`
-- added `generate_marine_test_env` function for generating `marine_test_env` in `build.rs`. It generates the same `marine_test_env as the multi-service `marine_test` does and has similar interface. This will allow IDE support.
+- multi-service `marine_test` can now be applied to a `mod` instead of a `fn`
+- added `generate_marine_test_env` function for generating `marine_test_env` in `build.rs`. It generates the same `marine_test_env` as the multi-service `marine_test` does and has similar interface. This will allow IDE support.
 - added `include_test_env!` declarative macro for including generated `marine_test_env` in the project
 
 ## Version 0.3.0 (2021-10-04)
