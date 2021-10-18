@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#![doc(html_root_url = "https://docs.rs/sdk-test/0.3.0")]
+#![doc(html_root_url = "https://docs.rs/marine-rs-sdk-test/0.4.0")]
 #![deny(
     dead_code,
     nonstandard_style,
@@ -28,6 +28,10 @@
 
 pub use marine_test_macro::marine_test;
 pub use marine_test_macro::fce_test;
+
+pub use marine_build_rs_generator::generate_marine_test_env;
+pub use marine_build_rs_generator::ServiceDescription;
+pub use marine_build_rs_generator::include_test_env;
 
 pub use fluence_app_service::CallParameters;
 pub use fluence_app_service::SecurityTetraplet;

@@ -1,14 +1,14 @@
-#[test]
-fn empty_test() {
+#[attribute]
+pub mod tests {
     pub mod marine_test_env {
-        pub mod empty_func {
+        pub mod empty_mod {
             pub mod modules {
                 pub mod greeting {
                     #[derive(
-                        Clone,
-                        Debug,
-                        marine_rs_sdk_test :: internal :: serde :: Serialize,
-                        marine_rs_sdk_test :: internal :: serde :: Deserialize
+                    Clone,
+                    Debug,
+                    marine_rs_sdk_test :: internal :: serde :: Serialize,
+                    marine_rs_sdk_test :: internal :: serde :: Deserialize
                     )]
                     #[serde(crate = "marine_rs_sdk_test::internal::serde")]
                     pub struct CallParameters {
@@ -20,10 +20,10 @@ fn empty_test() {
                         pub tetraplets: Vec<Vec<SecurityTetraplet>>
                     }
                     #[derive(
-                        Clone,
-                        Debug,
-                        marine_rs_sdk_test :: internal :: serde :: Serialize,
-                        marine_rs_sdk_test :: internal :: serde :: Deserialize
+                    Clone,
+                    Debug,
+                    marine_rs_sdk_test :: internal :: serde :: Serialize,
+                    marine_rs_sdk_test :: internal :: serde :: Deserialize
                     )]
                     #[serde(crate = "marine_rs_sdk_test::internal::serde")]
                     pub struct MountedBinaryResult {
@@ -33,10 +33,10 @@ fn empty_test() {
                         pub stderr: Vec<u8>
                     }
                     #[derive(
-                        Clone,
-                        Debug,
-                        marine_rs_sdk_test :: internal :: serde :: Serialize,
-                        marine_rs_sdk_test :: internal :: serde :: Deserialize
+                    Clone,
+                    Debug,
+                    marine_rs_sdk_test :: internal :: serde :: Serialize,
+                    marine_rs_sdk_test :: internal :: serde :: Deserialize
                     )]
                     #[serde(crate = "marine_rs_sdk_test::internal::serde")]
                     pub struct MountedBinaryStringResult {
@@ -46,10 +46,10 @@ fn empty_test() {
                         pub stderr: String
                     }
                     #[derive(
-                        Clone,
-                        Debug,
-                        marine_rs_sdk_test :: internal :: serde :: Serialize,
-                        marine_rs_sdk_test :: internal :: serde :: Deserialize
+                    Clone,
+                    Debug,
+                    marine_rs_sdk_test :: internal :: serde :: Serialize,
+                    marine_rs_sdk_test :: internal :: serde :: Deserialize
                     )]
                     #[serde(crate = "marine_rs_sdk_test::internal::serde")]
                     pub struct SecurityTetraplet {
@@ -77,10 +77,10 @@ fn empty_test() {
             }
             pub mod __facade_override {
                 #[derive(
-                    Clone,
-                    Debug,
-                    marine_rs_sdk_test :: internal :: serde :: Serialize,
-                    marine_rs_sdk_test :: internal :: serde :: Deserialize
+                Clone,
+                Debug,
+                marine_rs_sdk_test :: internal :: serde :: Serialize,
+                marine_rs_sdk_test :: internal :: serde :: Deserialize
                 )]
                 #[serde(crate = "marine_rs_sdk_test::internal::serde")]
                 pub struct CallParameters {
@@ -92,10 +92,10 @@ fn empty_test() {
                     pub tetraplets: Vec<Vec<SecurityTetraplet>>
                 }
                 #[derive(
-                    Clone,
-                    Debug,
-                    marine_rs_sdk_test :: internal :: serde :: Serialize,
-                    marine_rs_sdk_test :: internal :: serde :: Deserialize
+                Clone,
+                Debug,
+                marine_rs_sdk_test :: internal :: serde :: Serialize,
+                marine_rs_sdk_test :: internal :: serde :: Deserialize
                 )]
                 #[serde(crate = "marine_rs_sdk_test::internal::serde")]
                 pub struct MountedBinaryResult {
@@ -105,10 +105,10 @@ fn empty_test() {
                     pub stderr: Vec<u8>
                 }
                 #[derive(
-                    Clone,
-                    Debug,
-                    marine_rs_sdk_test :: internal :: serde :: Serialize,
-                    marine_rs_sdk_test :: internal :: serde :: Deserialize
+                Clone,
+                Debug,
+                marine_rs_sdk_test :: internal :: serde :: Serialize,
+                marine_rs_sdk_test :: internal :: serde :: Deserialize
                 )]
                 #[serde(crate = "marine_rs_sdk_test::internal::serde")]
                 pub struct MountedBinaryStringResult {
@@ -118,10 +118,10 @@ fn empty_test() {
                     pub stderr: String
                 }
                 #[derive(
-                    Clone,
-                    Debug,
-                    marine_rs_sdk_test :: internal :: serde :: Serialize,
-                    marine_rs_sdk_test :: internal :: serde :: Deserialize
+                Clone,
+                Debug,
+                marine_rs_sdk_test :: internal :: serde :: Serialize,
+                marine_rs_sdk_test :: internal :: serde :: Deserialize
                 )]
                 #[serde(crate = "marine_rs_sdk_test::internal::serde")]
                 pub struct SecurityTetraplet {
@@ -132,7 +132,7 @@ fn empty_test() {
                 }
                 pub struct ModuleInterface {
                     marine:
-                        std::rc::Rc<std::cell::RefCell<marine_rs_sdk_test::internal::AppService>,
+                    std::rc::Rc<std::cell::RefCell<marine_rs_sdk_test::internal::AppService>,
                     >,
                 }
                 impl ModuleInterface {
@@ -178,7 +178,7 @@ fn empty_test() {
                     std::fs::create_dir(&tmp_dir)
                         .expect("can't create a directory for service in tmp");
                     let mut module_path = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"));
-                    let mut file_path = std::path::Path::new("tests/generation_tests/multi-service-single").components();
+                    let mut file_path = std::path::Path::new("tests/generation_tests/multi-service-empty_mod").components();
                     let mut truncated_file_path = Vec::new();
                     loop {
                         if module_path.ends_with(file_path.as_path()) {
@@ -200,8 +200,8 @@ fn empty_test() {
                     for path in truncated_file_path.iter().rev() {
                         module_path.push(path);
                     }
-                    let config_path = module_path.join("empty_func/Config.toml");
-                    let modules_dir = module_path.join("empty_func/artifacts");
+                    let config_path = module_path.join("Config.toml");
+                    let modules_dir = module_path.join("artifacts");
                     let modules_dir = modules_dir
                         .to_str()
                         .expect("modules_dir contains invalid UTF8 string");
@@ -221,7 +221,7 @@ fn empty_test() {
                         service_id,
                         std::collections::HashMap::new()
                     )
-                    .unwrap_or_else(|e| panic!("app service can't be created: {}", e));
+                        .unwrap_or_else(|e| panic!("app service can't be created: {}", e));
                     let marine = std::rc::Rc::new(std::cell::RefCell::new(marine));
                     let modules = __GeneratedModules::new(marine.clone());
                     let __facade = __facade_override::ModuleInterface::new(marine.clone());
@@ -234,8 +234,8 @@ fn empty_test() {
             }
         }
     }
-    fn test_func() {
-        {}
-    }
-    test_func()
+    pub mod some_mod1;
+    pub mod some_mod2 {}
+    pub fn some_fn() {}
+    const SOME_CONST: i32 = 1;
 }

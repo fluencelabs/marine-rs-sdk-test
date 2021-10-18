@@ -1,0 +1,21 @@
+[package]
+name = "marine-build-rs-generator"
+version = "0.4.0"  # remember to update html_root_url
+edition = "2018"
+description = "Tools for generating marine_test_env in build scripts"
+documentation = "https://docs.rs/marine-build-rs-generator"
+repository = "https://github.com/fluencelabs/marine-rs-sdk-test/tree/master/crates/marine-build-rs-generator"
+authors = ["Fluence Labs"]
+keywords = ["fluence", "marine", "sdk", "webassembly"]
+categories = ["api-bindings", "wasm", "development-tools::testing"]
+license = "Apache-2.0"
+
+[package.metadata.docs.rs]
+all-features = true
+
+[lib]
+doctest = false
+
+[dependencies]
+marine-test-macro-impl = { path = "../marine-test-macro-impl", version = "=0.4.0" }
+

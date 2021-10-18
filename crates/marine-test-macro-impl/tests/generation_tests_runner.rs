@@ -84,3 +84,17 @@ fn test_multiservice_multiple() {
         descriptions
     ));
 }
+
+#[test]
+fn test_multiservice_empty_mod() {
+    let descriptions = vec![TestServiceDescription {
+        modules_dir: "artifacts",
+        config_path: "Config.toml",
+        name: "empty_mod",
+    }];
+    assert!(test_marine_test_token_streams_multiservice(
+        "tests/generation_tests/multi-service-empty_mod/marine_test.rs",
+        "tests/generation_tests/multi-service-empty_mod/expanded.rs",
+        descriptions
+    ));
+}

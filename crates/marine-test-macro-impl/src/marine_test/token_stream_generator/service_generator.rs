@@ -27,11 +27,11 @@ use proc_macro2::TokenStream;
 use itertools::{Itertools, zip};
 
 use std::path::Path;
-use std::collections::HashMap;
 
 pub(crate) fn generate_service_definitions(
-    services: HashMap<String, ServiceDescription>,
+    services: impl IntoIterator<Item = (String, ServiceDescription)>,
     file_path: &Path,
+    file_path_for_app_service: &Path,
 ) -> TResult<Vec<TokenStream>> {
     let services = services
         .into_iter()
@@ -55,9 +55,10 @@ pub(crate) fn generate_service_definitions(
         .map(|service| -> TResult<TokenStream> {
             // entry with service.name was added in link_services(...), so unwrap is safe
             generate_service_definition(
-                &service,
+                service,
                 file_path,
                 link_info.get::<str>(&service.name).unwrap(),
+                file_path_for_app_service,
             )
         })
         .collect::<TResult<Vec<TokenStream>>>()
@@ -84,7 +85,7 @@ impl ProcessedService {
         name: String,
         file_path: &Path,
     ) -> TResult<Self> {
-        let config_wrapper = load_config(&service.config_path, service.modules_dir, &file_path)?;
+        let config_wrapper = load_config(&service.config_path, service.modules_dir, file_path)?;
 
         Ok(Self {
             config: config_wrapper,

@@ -40,7 +40,7 @@ pub(super) fn generate_module_method(
 ) -> TResult<TokenStream> {
     let arguments = generate_arguments(signature.arguments.iter(), records)?;
     let output_type = generate_output_type(&signature.outputs, records)?;
-    let mcall = generate_marine_call(module_name, cp_setting, &signature, records)?;
+    let mcall = generate_marine_call(module_name, cp_setting, signature, records)?;
 
     let (cp, func_name) = generate_call_parameters(&cp_setting, signature)?;
 
@@ -60,7 +60,7 @@ pub(super) fn generate_module_method_forward(
 ) -> TResult<TokenStream> {
     let arguments = generate_arguments(signature.arguments.iter(), records)?;
     let output_type = generate_output_type(&signature.outputs, records)?;
-    let mcall = generate_forward_call(cp_setting, &signature)?;
+    let mcall = generate_forward_call(cp_setting, signature)?;
 
     let (cp, func_name) = generate_call_parameters(&cp_setting, signature)?;
 
@@ -89,8 +89,6 @@ fn generate_marine_call(
     let ret = generate_ret(&output_type);
 
     let function_call = quote! {
-        use std::ops::DerefMut;
-
         #convert_arguments
 
         #set_result #function_call
@@ -202,7 +200,7 @@ fn generate_output_type(output_types: &[IType], records: &IRecordTypes) -> TResu
     match output_type {
         None => Ok(TokenStream::new()),
         Some(ty) => {
-            let output_type = itype_to_tokens(&ty, records)?;
+            let output_type = itype_to_tokens(ty, records)?;
             let output_type = quote! { -> #output_type };
 
             Ok(output_type)

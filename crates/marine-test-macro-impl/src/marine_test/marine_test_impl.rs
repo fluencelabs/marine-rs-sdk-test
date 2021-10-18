@@ -14,14 +14,15 @@
  * limitations under the License.
  */
 
-use crate::attributes::MTestAttributes;
+use crate::attributes::{MTestAttributes, ServiceDescription};
 use crate::TResult;
 use crate::marine_test::glue_code_generator::generate_test_glue_code;
+use crate::marine_test::glue_code_generator::generate_marine_test_env_for_build_script;
 
 use proc_macro2::TokenStream;
 use darling::FromMeta;
 use syn::parse::Parser;
-use std::path::PathBuf;
+use std::path::{PathBuf, Path};
 
 pub fn marine_test_impl(
     attrs: TokenStream,
@@ -34,7 +35,14 @@ pub fn marine_test_impl(
     let attrs: Vec<syn::NestedMeta> = attrs.into_iter().collect();
     let attrs = MTestAttributes::from_list(&attrs)?;
 
-    let func_item = syn::parse2::<syn::ItemFn>(input)?;
+    let item = syn::parse2::<syn::Item>(input)?;
 
-    generate_test_glue_code(func_item, attrs, file_path)
+    generate_test_glue_code(item, attrs, file_path)
+}
+
+pub fn generate_marine_test_env_impl(
+    services: impl IntoIterator<Item = (String, ServiceDescription)>,
+    build_rs_file_path: &Path,
+) -> TResult<TokenStream> {
+    generate_marine_test_env_for_build_script(services, build_rs_file_path)
 }

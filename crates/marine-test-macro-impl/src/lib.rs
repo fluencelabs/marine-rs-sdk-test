@@ -31,6 +31,8 @@ mod errors;
 mod marine_test;
 
 pub use marine_test::marine_test_impl;
+pub use marine_test::generate_marine_test_env_impl;
 pub use errors::TestGeneratorError;
+pub use attributes::ServiceDescription;
 
 pub(crate) type TResult<T> = std::result::Result<T, TestGeneratorError>;

@@ -70,7 +70,6 @@ fn empty_string() {
             }
             impl ModuleInterface {
                 pub fn greeting(&mut self, name: String) -> String {
-                    use std::ops::DerefMut;
                     let arguments = marine_rs_sdk_test::internal::serde_json::json!([name]);
                     let result = self
                         .marine
@@ -88,7 +87,6 @@ fn empty_string() {
                     name: String,
                     cp: marine_rs_sdk_test::CallParameters
                 ) -> String {
-                    use std::ops::DerefMut;
                     let arguments = marine_rs_sdk_test::internal::serde_json::json!([name]);
                     let result = self
                         .marine
@@ -120,7 +118,6 @@ fn empty_string() {
             }
             impl ModuleInterface {
                 pub fn call_parameters(&mut self, ) -> String {
-                    use std::ops::DerefMut;
                     let arguments = marine_rs_sdk_test::internal::serde_json::json!([]);
                     let result = self
                         .marine
@@ -142,7 +139,6 @@ fn empty_string() {
                     &mut self,
                     cp: marine_rs_sdk_test::CallParameters
                 ) -> String {
-                    use std::ops::DerefMut;
                     let arguments = marine_rs_sdk_test::internal::serde_json::json!([]);
                     let result = self
                         .marine
@@ -156,7 +152,6 @@ fn empty_string() {
                     result
                 }
                 pub fn return_string(&mut self,) -> String {
-                    use std::ops::DerefMut;
                     let arguments = marine_rs_sdk_test::internal::serde_json::json!([]);
                     let result = self
                         .marine
@@ -178,7 +173,6 @@ fn empty_string() {
                     &mut self,
                     cp: marine_rs_sdk_test::CallParameters
                 ) -> String {
-                    use std::ops::DerefMut;
                     let arguments = marine_rs_sdk_test::internal::serde_json::json!([]);
                     let result = self
                         .marine
@@ -192,7 +186,6 @@ fn empty_string() {
                     result
                 }
                 pub fn test_array_refs(&mut self, ) -> Vec<String> {
-                    use std::ops::DerefMut;
                     let arguments = marine_rs_sdk_test::internal::serde_json::json!([]);
                     let result = self
                         .marine
@@ -214,7 +207,6 @@ fn empty_string() {
                     &mut self,
                     cp: marine_rs_sdk_test::CallParameters
                 ) -> Vec<String> {
-                    use std::ops::DerefMut;
                     let arguments = marine_rs_sdk_test::internal::serde_json::json!([]);
                     let result = self
                         .marine
@@ -236,7 +228,7 @@ fn empty_string() {
     let tmp_dir = tmp_dir.to_string_lossy().to_string();
     std::fs::create_dir(&tmp_dir).expect("can't create a directory for service in tmp");
     let mut module_path = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"));
-    let mut file_path = std::path::Path::new(file!()).components();
+    let mut file_path = std::path::Path::new("tests/generation_tests/multiple_modules").components();
     let mut truncated_file_path = Vec::new();
     loop {
         if module_path.ends_with(file_path.as_path()) {
@@ -257,7 +249,6 @@ fn empty_string() {
     for path in truncated_file_path.iter().rev() {
         module_path.push(path);
     }
-    let _ = module_path.pop();
     let config_path = module_path.join("Config.toml");
     let modules_dir = module_path.join("artifacts");
     let modules_dir = modules_dir

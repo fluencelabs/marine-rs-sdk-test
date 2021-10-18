@@ -59,6 +59,12 @@ pub enum TestGeneratorError {
 
     #[error("No modules loaded for a service")]
     NoModulesInService,
+
+    #[error("Multi-service variant must be applied to a mod or fn")]
+    ExpectedModOrFn,
+
+    #[error("Single-service variant must be applied to a fn")]
+    ExpectedFn,
 }
 
 #[derive(Debug, ThisError)]

@@ -63,7 +63,7 @@ pub(super) fn collect_modules<'config>(
     config: &'config TomlAppServiceConfig,
     modules_dir: &Path,
 ) -> TResult<Vec<Module<'config>>> {
-    let module_paths = collect_module_paths(config, &modules_dir);
+    let module_paths = collect_module_paths(config, modules_dir);
 
     module_paths
         .into_iter()
