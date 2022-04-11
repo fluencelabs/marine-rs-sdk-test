@@ -12,9 +12,9 @@ jobs:
           keys:
             - backendsdk01-{{ checksum "Cargo.toml" }}
       - run: | #TODO: enable 'stable' and 'beta' once `allocator_api` becomes stable
-          rustup toolchain install nightly-2021-02-27
-          rustup default nightly-2021-02-27
-          rustup override set nightly-2021-02-27
+          rustup toolchain install nightly-2022-03-20
+          rustup default nightly-2022-03-20
+          rustup override set nightly-2022-03-20
           rustup component add rustfmt
           rustup component add clippy
           cargo fmt --all -- --check --color always
