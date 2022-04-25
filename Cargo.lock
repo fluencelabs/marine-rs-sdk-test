@@ -390,9 +390,8 @@ dependencies = [
 
 [[package]]
 name = "fluence-app-service"
-version = "0.17.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "45d7990901492d79debb862d121442c935415f288e1d93234d1aede5a8a0a406"
+version = "0.17.1"
+source = "git+https://github.com/fluencelabs/marine?branch=update-it#2c920a1fe9aaeda5f4ef288f073973b685269506"
 dependencies = [
  "fluence-faas",
  "log",
@@ -407,9 +406,8 @@ dependencies = [
 
 [[package]]
 name = "fluence-faas"
-version = "0.16.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d382277889aa36f38cb861e40f91d19e9fe87325d3719a62a18e0d725e5064cc"
+version = "0.16.1"
+source = "git+https://github.com/fluencelabs/marine?branch=update-it#2c920a1fe9aaeda5f4ef288f073973b685269506"
 dependencies = [
  "bytesize",
  "cmd_lib",
@@ -437,8 +435,7 @@ dependencies = [
 [[package]]
 name = "fluence-it-types"
 version = "0.3.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "047f670b4807cab8872550a607b1515daff08b3e3bb7576ce8f45971fd811a4e"
+source = "git+https://github.com/fluencelabs/interface-types?branch=bug/allocating-more-than-2gb#dd4d6b7a248e00d94eb9b6ec85d01bc53359833d"
 dependencies = [
  "it-to-bytes",
  "nom",
@@ -614,9 +611,8 @@ dependencies = [
 
 [[package]]
 name = "it-json-serde"
-version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d11e4c01d0c15e4126541261b2ab17375da37d19e5d19bcea549ba236e8b4a82"
+version = "0.3.1"
+source = "git+https://github.com/fluencelabs/marine?branch=update-it#2c920a1fe9aaeda5f4ef288f073973b685269506"
 dependencies = [
  "serde",
  "serde_derive",
@@ -629,8 +625,7 @@ dependencies = [
 [[package]]
 name = "it-lilo"
 version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6a39dffcc610873b4c39b0fe04acac5ea77cf2eda9ed3d8a3b970b536d4e24c8"
+source = "git+https://github.com/fluencelabs/interface-types?branch=bug/allocating-more-than-2gb#dd4d6b7a248e00d94eb9b6ec85d01bc53359833d"
 dependencies = [
  "fluence-it-types",
  "it-memory-traits",
@@ -642,8 +637,7 @@ dependencies = [
 [[package]]
 name = "it-memory-traits"
 version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ca1799ed89e51a192e80a14ab14589044de9e58f0be86087ae8699cbe59f5c40"
+source = "git+https://github.com/fluencelabs/interface-types?branch=bug/allocating-more-than-2gb#dd4d6b7a248e00d94eb9b6ec85d01bc53359833d"
 dependencies = [
  "thiserror",
 ]
@@ -651,8 +645,7 @@ dependencies = [
 [[package]]
 name = "it-to-bytes"
 version = "0.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "729c74bb4236418898a219c6d96f14cba77456dd7c04a2e99e65e9c643709b56"
+source = "git+https://github.com/fluencelabs/interface-types?branch=bug/allocating-more-than-2gb#dd4d6b7a248e00d94eb9b6ec85d01bc53359833d"
 
 [[package]]
 name = "itertools"
@@ -735,16 +728,15 @@ checksum = "3e2e65a1a2e43cfcb47a895c4c8b10d1f4a61097f9f254f183aee60cad9c651d"
 
 [[package]]
 name = "marine-build-rs-generator"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "marine-test-macro-impl",
 ]
 
 [[package]]
 name = "marine-it-generator"
-version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0ebdfd1c29b954fc538e03ba9a7e95a5159175fafa41929587e7fc7bb950f02c"
+version = "0.8.1"
+source = "git+https://github.com/fluencelabs/marine?branch=update-it#2c920a1fe9aaeda5f4ef288f073973b685269506"
 dependencies = [
  "cargo_toml",
  "it-lilo",
@@ -760,9 +752,8 @@ dependencies = [
 
 [[package]]
 name = "marine-it-interfaces"
-version = "0.7.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "96669170af512d5e204ac3e7ce73691805120b95abfe9e7d247379128be5d9c7"
+version = "0.7.1"
+source = "git+https://github.com/fluencelabs/marine?branch=update-it#2c920a1fe9aaeda5f4ef288f073973b685269506"
 dependencies = [
  "multimap",
  "wasmer-interface-types-fl",
@@ -770,9 +761,8 @@ dependencies = [
 
 [[package]]
 name = "marine-it-parser"
-version = "0.9.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "07385efa5f6779143db076da84fcc786db6060815f828a050a83687d7c58e71f"
+version = "0.9.1"
+source = "git+https://github.com/fluencelabs/marine?branch=update-it#2c920a1fe9aaeda5f4ef288f073973b685269506"
 dependencies = [
  "anyhow",
  "itertools 0.10.1",
@@ -825,8 +815,7 @@ dependencies = [
 [[package]]
 name = "marine-min-it-version"
 version = "0.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "890269754a531810b8c16cf00e6161e01c1183ef7ff4ff20117656316e9fdbd1"
+source = "git+https://github.com/fluencelabs/marine?branch=update-it#2c920a1fe9aaeda5f4ef288f073973b685269506"
 dependencies = [
  "once_cell",
  "semver 0.11.0",
@@ -835,8 +824,7 @@ dependencies = [
 [[package]]
 name = "marine-module-info-parser"
 version = "0.2.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0ec8f4ab2eeeb5c1d66d9b56fe6b0b5bf39820aa8cc2f1d7be42bdf95654d529"
+source = "git+https://github.com/fluencelabs/marine?branch=update-it#2c920a1fe9aaeda5f4ef288f073973b685269506"
 dependencies = [
  "anyhow",
  "chrono",
@@ -850,9 +838,8 @@ dependencies = [
 
 [[package]]
 name = "marine-module-interface"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0d8b91a2c8d7905bad5d8a787a5aaab8fe9ec9efabead2ed031259c385d0b787"
+version = "0.4.1"
+source = "git+https://github.com/fluencelabs/marine?branch=update-it#2c920a1fe9aaeda5f4ef288f073973b685269506"
 dependencies = [
  "anyhow",
  "itertools 0.10.1",
@@ -890,7 +877,7 @@ dependencies = [
 
 [[package]]
 name = "marine-rs-sdk-test"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "fluence-app-service",
  "marine-build-rs-generator",
@@ -903,9 +890,8 @@ dependencies = [
 
 [[package]]
 name = "marine-runtime"
-version = "0.14.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d30e6f7fc6921497e1b7aba3737972fdae856d5c6a3f50eb4781ec9b40ec41b4"
+version = "0.14.1"
+source = "git+https://github.com/fluencelabs/marine?branch=update-it#2c920a1fe9aaeda5f4ef288f073973b685269506"
 dependencies = [
  "anyhow",
  "boolinator",
@@ -936,7 +922,7 @@ dependencies = [
 
 [[package]]
 name = "marine-test-macro"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "marine-test-macro-impl",
  "proc-macro-error",
@@ -947,7 +933,7 @@ dependencies = [
 
 [[package]]
 name = "marine-test-macro-impl"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "darling 0.12.4",
  "fluence-app-service",
@@ -975,8 +961,7 @@ dependencies = [
 [[package]]
 name = "marine-utils"
 version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1cff7a23a7f3925a712c34dfb9cd87994012d7743f016fd1533e12ab5a8335ca"
+source = "git+https://github.com/fluencelabs/marine?branch=update-it#2c920a1fe9aaeda5f4ef288f073973b685269506"
 
 [[package]]
 name = "memchr"
@@ -1645,9 +1630,8 @@ dependencies = [
 
 [[package]]
 name = "wasmer-interface-types-fl"
-version = "0.23.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1246e98bc1798552556d4ded306c37cbf73b3ffb52183d2605c0129f58fcc98a"
+version = "0.23.1"
+source = "git+https://github.com/fluencelabs/interface-types?branch=bug/allocating-more-than-2gb#dd4d6b7a248e00d94eb9b6ec85d01bc53359833d"
 dependencies = [
  "fluence-it-types",
  "it-lilo",
