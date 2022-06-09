@@ -390,9 +390,9 @@ dependencies = [
 
 [[package]]
 name = "fluence-app-service"
-version = "0.17.4"
+version = "0.17.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ee31f521ee73f85d289e550b1a67453b11884af05ac2b1b05bd1af7e7cc049bd"
+checksum = "ace6450ba26f7f1c185c0cb465b4c14b0da59419527a91ec3707842e3821b4f5"
 dependencies = [
  "log",
  "maplit",
@@ -713,9 +713,9 @@ dependencies = [
 
 [[package]]
 name = "marine-core"
-version = "0.15.0"
+version = "0.15.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "488e42450e993abe84d83737aa0d76c846057e702270f7f3465125aaae58e09d"
+checksum = "1bda166e903be5e13db562eab1293e35fe871aa8d9093857922f228e2158e7ea"
 dependencies = [
  "anyhow",
  "boolinator",
@@ -907,9 +907,9 @@ dependencies = [
 
 [[package]]
 name = "marine-runtime"
-version = "0.17.1"
+version = "0.17.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d360c3731b2e1c2bebeb7aec98aa323d4805bb506e04513ad3be838d07d07631"
+checksum = "b04e7ebe49ba214363d8ce7e81cf9fd237adb10d3b9519a20677cc4ab0690009"
 dependencies = [
  "bytesize",
  "cmd_lib",

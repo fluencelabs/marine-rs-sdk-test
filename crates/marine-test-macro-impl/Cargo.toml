@@ -14,7 +14,7 @@ license = "Apache-2.0"
 all-features = true
 
 [dependencies]
-fluence-app-service = { version = "0.17.4", features = ["raw-module-api"] }
+fluence-app-service = { version = "0.17.5", features = ["raw-module-api"] }
 marine-it-parser = "0.9.1"
 itertools = "0.10.1"
 darling = "0.12.2"
