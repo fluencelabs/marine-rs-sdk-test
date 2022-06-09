@@ -145,7 +145,7 @@ fn test() {
         )
     );
     __m_generated_marine_config.service_base_dir = Some(tmp_dir);
-    __m_generated_marine_config.toml_faas_config.modules_dir = Some(modules_dir.to_string());
+    __m_generated_marine_config.toml_marine_config.modules_dir = Some(modules_dir.to_string());
     let marine = marine_rs_sdk_test::internal::AppService::new_with_empty_facade(
         __m_generated_marine_config,
         service_id,

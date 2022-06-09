@@ -77,7 +77,7 @@ fn collect_module_paths<'config>(
     modules_dir: &Path,
 ) -> Vec<(&'config str, PathBuf)> {
     config
-        .toml_faas_config
+        .toml_marine_config
         .module
         .iter()
         .map(|m| {
@@ -102,7 +102,7 @@ pub(super) fn resolve_modules_dir(
     match modules_dir {
         Some(modules_dir) => Some(PathBuf::from(modules_dir)),
         None => config
-            .toml_faas_config
+            .toml_marine_config
             .modules_dir
             .as_ref()
             .map(PathBuf::from),
