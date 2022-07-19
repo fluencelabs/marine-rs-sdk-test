@@ -11,14 +11,13 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  service:
-    name: "Build and test Rust service"
+  build:
+    name: "Build and test"
     runs-on: builder
 
     env:
       RUST_BACKTRACE: 1
       CARGO_TERM_COLOR: always
-
 
     steps:
       - uses: actions/checkout@v3
