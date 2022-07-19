@@ -45,7 +45,7 @@ jobs:
         working-directory: crates/marine-test-macro-impl
 
       - name: "cargo test"
-        run: cargo test run --release --all-features --no-fail-fast
+        run: cargo test --release --all-features --no-fail-fast
 
       - name: "cargo clippy"
         run: cargo clippy -Z unstable-options --all
