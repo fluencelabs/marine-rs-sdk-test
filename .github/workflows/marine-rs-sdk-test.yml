@@ -24,8 +24,7 @@ jobs:
 
       - uses: actions-rs/toolchain@v1
         with:
-          toolchain: nightly-2022-06-30
-          target: wasm32-wasi
+          toolchain: stable
           default: true
           components: rustfmt, clippy
 
