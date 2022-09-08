@@ -12,6 +12,7 @@ concurrency:
 
 env:
   RUST_TEST_THREADS: 1
+  CARGO_HOME: "${{ github.workspace }}/cargo"
 
 jobs:
   marine-rs-sdk-test:
