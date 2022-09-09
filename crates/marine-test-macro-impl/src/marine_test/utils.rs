@@ -31,7 +31,7 @@ pub(super) fn itype_to_tokens(itype: &IType, records: &IRecordTypes) -> TResult<
         IType::Record(record_id) => {
             let record = records
                 .get(record_id)
-                .ok_or_else(|| crate::errors::CorruptedITSection::AbsentRecord(*record_id))?;
+                .ok_or(crate::errors::CorruptedITSection::AbsentRecord(*record_id))?;
             let record_name = new_ident(&record.name)?;
             let token_stream = quote! { #record_name };
             token_stream
