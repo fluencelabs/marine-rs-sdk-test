@@ -17,5 +17,4 @@ all-features = true
 doctest = false
 
 [dependencies]
-marine-test-macro-impl = { path = "../marine-test-macro-impl", version = "=0.7.0" }
-
+marine-test-macro-impl = { path = "../marine-test-macro-impl", version = "=0.7.1" }
