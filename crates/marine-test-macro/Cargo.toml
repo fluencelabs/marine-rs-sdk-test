@@ -18,7 +18,7 @@ proc-macro = true
 doctest = false
 
 [dependencies]
-marine-test-macro-impl = { path = "../marine-test-macro-impl", version = "=0.7.1" }
+marine-test-macro-impl = { path = "../marine-test-macro-impl", version = "=0.7.0" }
 
 quote = "1.0.9"
 proc-macro2 = "1.0.24"
