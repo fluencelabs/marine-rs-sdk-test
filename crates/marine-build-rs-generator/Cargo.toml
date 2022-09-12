@@ -1,6 +1,6 @@
 [package]
 name = "marine-build-rs-generator"
-version = "0.7.2"
+version = "0.7.3"
 edition = "2018"
 description = "Tools for generating marine_test_env in build scripts"
 documentation = "https://docs.rs/marine-build-rs-generator"
