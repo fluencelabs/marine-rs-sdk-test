@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#![doc(html_root_url = "https://docs.rs/marine-build-rs-generator/0.7.1")]
+#![doc(html_root_url = "https://docs.rs/marine-build-rs-generator/0.7.2")]
 #![deny(
     dead_code,
     nonstandard_style,

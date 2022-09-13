@@ -695,7 +695,7 @@ checksum = "3e2e65a1a2e43cfcb47a895c4c8b10d1f4a61097f9f254f183aee60cad9c651d"
 
 [[package]]
 name = "marine-build-rs-generator"
-version = "0.7.1"
+version = "0.7.2"
 dependencies = [
  "marine-test-macro-impl",
 ]
@@ -882,7 +882,7 @@ dependencies = [
 
 [[package]]
 name = "marine-rs-sdk-test"
-version = "0.7.1"
+version = "0.7.2"
 dependencies = [
  "fluence-app-service",
  "marine-build-rs-generator",
@@ -924,7 +924,7 @@ dependencies = [
 
 [[package]]
 name = "marine-test-macro"
-version = "0.7.1"
+version = "0.7.2"
 dependencies = [
  "marine-test-macro-impl",
  "proc-macro-error",
@@ -935,7 +935,7 @@ dependencies = [
 
 [[package]]
 name = "marine-test-macro-impl"
-version = "0.7.1"
+version = "0.7.2"
 dependencies = [
  "darling 0.14.1",
  "fluence-app-service",
