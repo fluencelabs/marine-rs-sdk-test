@@ -23,7 +23,6 @@ use crate::marine_test::modules_linker::LinkedModules;
 use super::service_generation_utils::generate_service_definition;
 
 use marine_it_parser::it_interface::IModuleInterface;
-
 use proc_macro2::TokenStream;
 use itertools::Itertools;
 
