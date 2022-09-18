@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#![doc(html_root_url = "https://docs.rs/marine-rs-sdk-test/0.8.0")]
+#![doc(html_root_url = "https://docs.rs/marine-rs-sdk-test/0.8.1")]
 #![deny(
     dead_code,
     nonstandard_style,
