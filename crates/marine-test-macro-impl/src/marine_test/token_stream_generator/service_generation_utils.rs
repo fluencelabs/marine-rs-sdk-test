@@ -65,7 +65,7 @@ pub(crate) fn generate_app_service_ctor(
         let mut __m_generated_marine_config = marine_rs_sdk_test::internal::TomlAppServiceConfig::load(&config_path)
             .unwrap_or_else(|e| panic!("app service config located at `{:?}` can't be loaded: {}", config_path, e));
         __m_generated_marine_config.service_base_dir = Some(tmp_dir);
-        __m_generated_marine_config.toml_marine_config.modules_dir = Some(modules_dir.to_string());
+        __m_generated_marine_config.toml_marine_config.modules_dir = Some(std::path::PathBuf::from(modules_dir));
 
         let marine = marine_rs_sdk_test::internal::AppService::new_with_empty_facade(__m_generated_marine_config, service_id, std::collections::HashMap::new())
             .unwrap_or_else(|e| panic!("app service can't be created: {}", e));
