@@ -1,0 +1,14 @@
+name: Run tests
+
+on:
+  pull_request:
+    paths-ignore:
+      - "**.md"
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  marine-rs-sdk-test:
+    uses: ./.github/workflows/tests.yml

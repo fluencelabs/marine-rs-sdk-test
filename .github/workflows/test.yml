@@ -1,18 +1,14 @@
-name: "marine-rs-sdk-test"
+name: Run tests with workflow_call
 
 on:
-  pull_request:
-  push:
-    branches:
-      - "master"
-
-concurrency:
-  group: "${{ github.workflow }}-${{ github.ref }}"
-  cancel-in-progress: true
+  workflow_call:
+    inputs:
+      marine-runtime-version:
+        description: "marine-runtime version"
+        type: string
 
 env:
   RUST_TEST_THREADS: 1
-  CARGO_HOME: "${{ github.workspace }}/cargo"
 
 jobs:
   marine-rs-sdk-test:
@@ -25,8 +21,12 @@ jobs:
       - name: Setup rust toolchain
         uses: actions-rust-lang/setup-rust-toolchain@v1
 
-      - name: Run cargo fmt
-        run: cargo fmt --all -- --check
+      - name: Set marine-runtime version from branch
+        if: inputs.marine-runtime-version != ''
+        uses: fluencelabs/github-actions/cargo-set-dependency@main
+        with:
+          package: marine-runtime
+          version: ${{ inputs.marine-runtime-version }}
 
       - name: Run cargo build
         run: cargo build
@@ -34,12 +34,11 @@ jobs:
       - name: Run cargo check
         run: cargo check -v --all-features
 
-      - name: Run cargo test in marine-test-macro-impl
-        run: cargo test
-        working-directory: crates/marine-test-macro-impl
-
       - name: Run cargo test
         run: cargo test --release --all-features --no-fail-fast
 
       - name: Run cargo clippy
         run: cargo clippy -Z unstable-options --all
+
+      - name: Run rustfmt
+        uses: actions-rust-lang/rustfmt@v1
