@@ -32,6 +32,7 @@ jobs:
           version: ${{ inputs.fluence-app-service-version }}
 
       - name: debug
+        if: failure()
         run: dasel -f Cargo.lock -p toml 'package.(name=fluence-app-service).source' -m
 
       - name: Run cargo build
