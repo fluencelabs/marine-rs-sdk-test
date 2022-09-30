@@ -38,4 +38,4 @@ members = [
     ]
 
 [workspace.dependencies]
-fluence-app-service = { version = "0.22.1", features = ["raw-module-api"]}
+fluence-app-service = { version = "0.22.1", features = ["raw-module-api"] }

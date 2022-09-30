@@ -16,7 +16,10 @@ jobs:
     runs-on: builder
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout to marine-rs-sdk-test
+        uses: actions/checkout@v3
+        with:
+          repository: "fluencelabs/marine-rs-sdk-test"
 
       - name: Setup rust toolchain
         uses: actions-rust-lang/setup-rust-toolchain@v1
