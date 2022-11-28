@@ -15,3 +15,5 @@ concurrency:
 jobs:
   marine-rs-sdk-test:
     uses: ./.github/workflows/tests.yml
+    with:
+      ref: ${{ github.ref }}
