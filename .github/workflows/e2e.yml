@@ -1,9 +1,12 @@
-name: Run tests
+name: "e2e"
 
 on:
   pull_request:
     paths-ignore:
       - "**.md"
+  push:
+    branches:
+      - "master"
 
 concurrency:
   group: "${{ github.workflow }}-${{ github.ref }}"

@@ -3,9 +3,13 @@ name: Run tests with workflow_call
 on:
   workflow_call:
     inputs:
-      fluence-app-service-version:
-        description: "fluence-app-service version"
+      cargo-dependencies:
+        description: "Cargo dependencies map"
         type: string
+      ref:
+        description: "git ref to checkout to"
+        type: string
+        default: "matster"
 
 env:
   RUST_TEST_THREADS: 1
@@ -20,21 +24,16 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: "fluencelabs/marine-rs-sdk-test"
-          ref: "marine-e2e"
+          ref: ${{ inputs.ref }}
 
       - name: Setup rust toolchain
         uses: actions-rust-lang/setup-rust-toolchain@v1
 
-      - name: Set fluence-app-service version from branch
-        if: inputs.fluence-app-service-version != ''
+      - name: Set dependencies
+        if: inputs.cargo-dependencies != ''
         uses: fluencelabs/github-actions/cargo-set-dependency@main
         with:
-          package: fluence-app-service
-          version: ${{ inputs.fluence-app-service-version }}
-
-      - name: debug
-        if: failure()
-        run: dasel -f Cargo.lock -p toml 'package.(name=fluence-app-service).source' -m
+          dependencies: ${{ inputs.cargo-dependencies }}
 
       - name: Run cargo build
         run: cargo build
