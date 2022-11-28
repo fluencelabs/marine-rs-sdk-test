@@ -34,4 +34,4 @@ members = [
     "crates/marine-test-macro",
     "crates/marine-test-macro-impl",
     "crates/marine-build-rs-generator",
-    ]
+]
