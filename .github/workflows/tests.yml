@@ -9,7 +9,7 @@ on:
       ref:
         description: "git ref to checkout to"
         type: string
-        default: "matster"
+        default: "master"
 
 env:
   RUST_TEST_THREADS: 1
