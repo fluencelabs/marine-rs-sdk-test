@@ -14,15 +14,15 @@ license = "Apache-2.0"
 all-features = true
 
 [dependencies]
-fluence-app-service = { version = "0.22.1", features = ["raw-module-api"] }
-marine-it-parser = "0.11.0"
-itertools = "0.10.4"
-darling = "0.14.1"
+fluence-app-service = { version = "0.22.3", features = ["raw-module-api"] }
+marine-it-parser = "0.11.1"
+itertools = "0.10.5"
+darling = "0.14.2"
 quote = "1.0.21"
-proc-macro2 = "1.0.43"
+proc-macro2 = "1.0.47"
 proc-macro-error = { version = "1.0.4", default-features = false }
-syn = { version = '1.0.100', features = ['full'] }
-thiserror = "1.0.35"
+syn = { version = '1.0.105', features = ['full'] }
+thiserror = "1.0.37"
 static_assertions = "1.1.0"
 
 [dev-dependencies]
