@@ -1,4 +1,4 @@
-name: Publish snapshot
+name: Run tests with workflow_call
 
 on:
   workflow_call:
@@ -13,11 +13,11 @@ on:
     outputs:
       cargo-version:
         description: "Cargo snapshot version"
-        value: ${{ jobs.cargo-snapshot.outputs.version }}
+        value: ${{ jobs.tests.outputs.version }}
 
 jobs:
-  cargo-snapshot:
-    name: "Publish cargo snapshot"
+  tests:
+    name: "Run tests"
     runs-on: builder
 
     outputs:
