@@ -1,4 +1,4 @@
-name: Run tests with workflow_call
+name: Publish snapshot
 
 on:
   workflow_call:
@@ -10,23 +10,31 @@ on:
         description: "git ref to checkout to"
         type: string
         default: "master"
-
-env:
-  RUST_TEST_THREADS: 1
+    outputs:
+      cargo-version:
+        description: "Cargo snapshot version"
+        value: ${{ jobs.cargo-snapshot.outputs.version }}
 
 jobs:
-  marine-rs-sdk-test:
-    name: "Run tests"
+  cargo-snapshot:
+    name: "Publish cargo snapshot"
     runs-on: builder
 
+    outputs:
+      version: "${{ steps.snapshot.outputs.version }}"
+
+    permissions:
+      contents: read
+      id-token: write
+
     steps:
-      - name: Checkout to marine-rs-sdk-test
+      - name: Checkout to repository
         uses: actions/checkout@v3
         with:
-          repository: "fluencelabs/marine-rs-sdk-test"
+          repository: fluencelabs/marine-rs-sdk-test
           ref: ${{ inputs.ref }}
 
-      - name: Setup rust toolchain
+      - name: Setup Rust toolchain
         uses: actions-rust-lang/setup-rust-toolchain@v1
 
       - name: Set dependencies
@@ -34,9 +42,6 @@ jobs:
         uses: fluencelabs/github-actions/cargo-set-dependency@main
         with:
           dependencies: ${{ inputs.cargo-dependencies }}
-
-      - name: Run cargo build
-        run: cargo build
 
       - name: Run cargo check
         run: cargo check -v --all-features
@@ -49,3 +54,13 @@ jobs:
 
       - name: Run rustfmt
         uses: actions-rust-lang/rustfmt@v1
+
+      - name: Generate snapshot version
+        id: version
+        uses: fluencelabs/github-actions/generate-snapshot-id@main
+
+      - name: Publish crate snapshots
+        id: snapshot
+        uses: fluencelabs/github-actions/cargo-publish-snapshot@main
+        with:
+          id: ${{ steps.version.outputs.id }}
