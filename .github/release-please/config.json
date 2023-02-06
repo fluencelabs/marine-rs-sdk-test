@@ -1,0 +1,11 @@
+{
+  "bootstrap-sha": "b66707fdaac5afcfc3374f8b3cf6c76be8cc34fd",
+  "release-type": "simple",
+  "bump-minor-pre-major": true,
+  "bump-patch-for-minor-pre-major": true,
+  "packages": {
+    ".": {
+      "component": "marine-rs-sdk-test"
+    }
+  }
+}
