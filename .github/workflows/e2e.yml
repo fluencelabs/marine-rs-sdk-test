@@ -5,6 +5,7 @@ on:
     paths-ignore:
       - "**.md"
       - ".github/**"
+      - "!.github/workflows/e2e.yml"
       - "!.github/workflows/tests.yml"
   push:
     branches:
