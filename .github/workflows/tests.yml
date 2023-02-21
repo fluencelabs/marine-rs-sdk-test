@@ -1,0 +1,80 @@
+name: Run tests with workflow_call
+
+on:
+  workflow_call:
+    inputs:
+      cargo-dependencies:
+        description: "Cargo dependencies map"
+        type: string
+      ref:
+        description: "git ref to checkout to"
+        type: string
+        default: "master"
+    outputs:
+      cargo-version:
+        description: "Cargo snapshot version"
+        value: ${{ jobs.tests.outputs.version }}
+
+jobs:
+  tests:
+    name: "Run tests"
+    runs-on: builder
+
+    outputs:
+      version: "${{ steps.snapshot.outputs.version }}"
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout to repository
+        uses: actions/checkout@v3
+        with:
+          repository: fluencelabs/marine-rs-sdk-test
+          ref: ${{ inputs.ref }}
+
+      - name: Import secrets
+        uses: hashicorp/vault-action@v2.4.3
+        with:
+          url: https://vault.fluence.dev
+          path: jwt/github
+          role: ci
+          method: jwt
+          jwtGithubAudience: "https://github.com/fluencelabs"
+          jwtTtl: 300
+          exportToken: false
+          secrets: |
+            kv/cargo-registry/users/ci token | CARGO_REGISTRIES_FLUENCE_TOKEN
+
+
+      - name: Setup Rust toolchain
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+
+      - name: Set dependencies
+        if: inputs.cargo-dependencies != ''
+        uses: fluencelabs/github-actions/cargo-set-dependency@main
+        with:
+          dependencies: ${{ inputs.cargo-dependencies }}
+
+      - name: Run cargo check
+        run: cargo check -v --all-features
+
+      - name: Run cargo test
+        run: cargo test --release --all-features --no-fail-fast
+
+      - name: Run cargo clippy
+        run: cargo clippy -Z unstable-options --all
+
+      - name: Run rustfmt
+        uses: actions-rust-lang/rustfmt@v1
+
+      - name: Generate snapshot version
+        id: version
+        uses: fluencelabs/github-actions/generate-snapshot-id@main
+
+      - name: Publish crate snapshots
+        id: snapshot
+        uses: fluencelabs/github-actions/cargo-publish-snapshot@main
+        with:
+          id: ${{ steps.version.outputs.id }}

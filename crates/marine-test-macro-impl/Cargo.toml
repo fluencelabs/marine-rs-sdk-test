@@ -1,6 +1,6 @@
 [package]
 name = "marine-test-macro-impl"
-version = "0.5.0"  # remember to update html_root_url
+version = "0.8.1"
 edition = "2018"
 description = "Implementation of the `#[marine_test]` macro"
 documentation = "https://docs.rs/fluence/marine-test-macro-impl"
@@ -14,15 +14,15 @@ license = "Apache-2.0"
 all-features = true
 
 [dependencies]
-fluence-app-service = { version = "0.17.0", features = ["raw-module-api"] }
-marine-it-parser = "0.9.0"
-itertools = "0.10.1"
-darling = "0.12.2"
-quote = "1.0.9"
-proc-macro2 = "1.0.26"
+fluence-app-service = { version = "0.22.1", features = ["raw-module-api"] }
+marine-it-parser = "0.11.0"
+itertools = "0.10.4"
+darling = "0.14.1"
+quote = "1.0.21"
+proc-macro2 = "1.0.43"
 proc-macro-error = { version = "1.0.4", default-features = false }
-syn = { version = '1.0.64', features = ['full'] }
-thiserror = "1.0.24"
+syn = { version = '1.0.100', features = ['full'] }
+thiserror = "1.0.35"
 static_assertions = "1.1.0"
 
 [dev-dependencies]

@@ -24,9 +24,10 @@ use super::service_generation_utils::generate_service_definition;
 
 use marine_it_parser::it_interface::IModuleInterface;
 use proc_macro2::TokenStream;
-use itertools::{Itertools, zip};
+use itertools::Itertools;
 
 use std::path::Path;
+use std::iter::zip;
 
 pub(crate) fn generate_service_definitions(
     services: impl IntoIterator<Item = (String, ServiceDescription)>,

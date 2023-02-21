@@ -19,12 +19,13 @@ use crate::{TResult, TestGeneratorError};
 use marine_it_parser::it_interface::{IRecordTypes, IModuleInterface};
 use marine_it_parser::it_interface::it::{IType, IRecordType};
 
-use itertools::zip;
+use static_assertions::const_assert;
+
 use std::cmp::Ordering;
 use std::collections::HashMap;
 use std::hash::Hasher;
 use std::rc::Rc;
-use static_assertions::const_assert;
+use std::iter::zip;
 
 pub(super) fn link_modules<'modules>(
     modules: impl ExactSizeIterator<Item = (&'modules str, &'modules IModuleInterface)>,
