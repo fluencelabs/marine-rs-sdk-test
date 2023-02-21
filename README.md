@@ -1,7 +1,7 @@
 # Marine Test Rust SDK
-[![crates.io version](https://img.shields.io/crates/v/marine-rs-sdk?color=green)](https://crates.io/crates/marine-rs-sdk-test)
+[![crates.io version](https://img.shields.io/crates/v/marine-rs-sdk-test?color=green)](https://crates.io/crates/marine-rs-sdk-test)
 
-This SDK aims to help [Marine](https://github.com/fluencelabs/marine) developers to test their Wasm modules and services because `cargo test` can't run such modules, but it's necessary for testing. To avoid that limitation, the sdk introduces the `#[marine-test]` macro that does much of the heavy lifting to allow developers to use `cargo test` as intended. That is, the `#[marine-test]` macro generates the necessary code to call Marine, one instance per test function, based on the Wasm module and associated configuration file so that the actual test function is run against the Wasm module, not the native code.
+This SDK aims to help developers targeting [Marine](https://github.com/fluencelabs/marine) to test their Wasm modules and services because `cargo test` can't run such modules, but it's necessary for testing. To avoid that limitation, the sdk introduces the `#[marine_test]` macro that does much of the heavy lifting to allow developers to use `cargo test` as intended. That is, the `#[marine_test]` macro generates the necessary code to call Marine, one instance per test function, based on the Wasm module and associated configuration file so that the actual test function is run against the Wasm module, not the native code.
 
 
 ## Usage
@@ -48,7 +48,7 @@ More details can be found in [this chapter](https://fluence.dev/docs/marine-book
 
 - **[crates](./crates)**
     - [macro-build-rs-generator](./crates/macro-build-rs-generator) - generator of `build.rs` file intended to provide IDE support for generated glue code
-    - [marine-test-macro-impl](./crates/marine-test-macro-impl) - actual realization of the `#[marine_test]` macro
+    - [marine-test-macro-impl](./crates/marine-test-macro-impl) - actual implementation of the `#[marine_test]` macro
     - [marine-test-macro](./crates/marine-test-macro) - proc-macro crate for the `#[marine_test]` macro
 - **[src](./src)** - reexports all necessary things intended to use by end user
 
