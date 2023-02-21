@@ -1,3 +1,13 @@
+# Changelog
+
+## [0.8.2](https://github.com/fluencelabs/marine-rs-sdk-test/compare/marine-rs-sdk-test-v0.8.1...marine-rs-sdk-test-v0.8.2) (2023-02-21)
+
+
+### Bug Fixes
+
+* **deps:** update rust crate fluence-app-service to 0.23.1 ([#50](https://github.com/fluencelabs/marine-rs-sdk-test/issues/50)) ([1167214](https://github.com/fluencelabs/marine-rs-sdk-test/commit/11672142621d79293ec17f6ae56e4d48fc4ec835))
+* **deps:** update rust crate marine-it-parser to 0.11.1 ([#41](https://github.com/fluencelabs/marine-rs-sdk-test/issues/41)) ([0baeb86](https://github.com/fluencelabs/marine-rs-sdk-test/commit/0baeb863cc066cb5efb72e28986aac1408e08c9b))
+
 ## Version 0.4.0 (2021-10-18)
 [PR 10](https://github.com/fluencelabs/marine-rs-sdk-test/pull/10):
 - multi-service `marine_test` can now be applied to a `mod` instead of a `fn`
