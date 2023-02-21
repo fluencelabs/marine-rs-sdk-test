@@ -25,7 +25,7 @@ marine-test-macro = { path = "crates/marine-test-macro", version = "=0.8.1" }
 marine-build-rs-generator = { path = "crates/marine-build-rs-generator", version = "=0.8.1" }
 fluence-app-service = { version = "0.23.1", features = ["raw-module-api"] }
 
-serde = { version = "1.0.144", features = ["derive"] }
+serde = { version = "1.0.152", features = ["derive"] }
 serde_json = "1.0.85"
 uuid = { version = "1.1.2", features = ["v4"] }
 
