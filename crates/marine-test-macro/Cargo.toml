@@ -21,6 +21,6 @@ doctest = false
 marine-test-macro-impl = { path = "../marine-test-macro-impl", version = "=0.8.1" }
 
 quote = "1.0.21"
-proc-macro2 = "1.0.43"
+proc-macro2 = "1.0.51"
 proc-macro-error = { version = "1.0.4", default-features = false }
 syn = { version = '1.0.100', features = ['full'] }
