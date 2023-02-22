@@ -1,12 +1,12 @@
 # Marine Test Rust SDK
 [![crates.io version](https://img.shields.io/crates/v/marine-rs-sdk-test?color=green)](https://crates.io/crates/marine-rs-sdk-test)
 
-This SDK aims to help developers targeting [Marine](https://github.com/fluencelabs/marine) to test their Wasm modules and services because `cargo test` can't run such modules, but it's necessary for testing. To avoid that limitation, the sdk introduces the `#[marine_test]` macro that does much of the heavy lifting to allow developers to use `cargo test` as intended. That is, the `#[marine_test]` macro generates the necessary code to call Marine, one instance per test function, based on the Wasm module and associated configuration file so that the actual test function is run against the Wasm module, not the native code.
+This SDK aims to help developers targeting [Marine](https://github.com/fluencelabs/marine) to test their Wasm modules and services because `cargo test` can't run such modules, but it's necessary for testing. To avoid that limitation, the SDK introduces the `#[marine_test]` macro that does much of the heavy lifting to allow developers to use `cargo test` as intended. That is, the `#[marine_test]` macro generates the necessary code to call Marine, one instance per test function, based on the Wasm module and associated configuration file so that the actual test function is run against the Wasm module, not the native code.
 
 
 ## Usage
 
-The core component of the sdk is the `#[marine_test]` macro that can wrap a test function, providing an experience similar to "vanilla" Rust. A wrapped function should receive a special object representing a module interface, let's see an example:
+The core component of the SDK is the `#[marine_test]` macro that can wrap a test function, providing an experience similar to "vanilla" Rust. A wrapped function should receive a special object representing a module interface, let's see an example:
 ```rust
 use marine_rs_sdk::marine;
 
@@ -28,7 +28,7 @@ mod tests {
     }
 }
 ```
-This example shows a simple [module](https://fluence.dev/docs/marine-book/quick-start/develop-a-single-module-service) with one export function `greeting` and a test. The test function is wrapped with `#[marine_test]` macro with the specified path to the config file (`Config.toml`), and the directory containing the Wasm module we obtained after compiling our project with the [marine CLI](https://fluence.dev/docs/marine-book/marine-tooling-reference/marine-cli) build command. This macro generates all the necessary glue code to instantiate Marine instance under the hood and call the greeting module loaded into it.
+This example shows a simple [module](https://fluence.dev/docs/marine-book/quick-start/develop-a-single-module-service) with one export function `greeting` and a test. The test function is wrapped with `#[marine_test]` macro, which specifies a path to the config file (`Config.toml`) and the directory containing the Wasm module we obtained after compiling the project with the [marine CLI](https://fluence.dev/docs/marine-book/marine-tooling-reference/marine-cli) build command. This macro generates the necessary glue code to instantiate Marine instance under the hood and call the greeting module loaded into it.
 
 After we have our Wasm module and tests in place, we can proceed with `cargo test`.
 
