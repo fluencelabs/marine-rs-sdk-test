@@ -28,7 +28,7 @@ mod tests {
     }
 }
 ```
-This example shows a simple [module](https://fluence.dev/docs/marine-book/quick-start/develop-a-single-module-service) with one export function `greeting` and a test. The test function is wrapped with `#[marine_test]` macro, which specifies a path to the config file (`Config.toml`) and the directory containing the Wasm module we obtained after compiling the project with the [marine CLI](https://fluence.dev/docs/marine-book/marine-tooling-reference/marine-cli) build command. This macro generates the necessary glue code to instantiate Marine instance under the hood and call the greeting module loaded into it.
+This example shows a simple [module](https://fluence.dev/docs/marine-book/quick-start/develop-a-single-module-service) with one export function `greeting` and a test. The test function is wrapped with the `#[marine_test]` macro, which specifies a path to the config file (`Config.toml`) and the directory containing the Wasm module we obtained after compiling the project with the [marine CLI](https://fluence.dev/docs/marine-book/marine-tooling-reference/marine-cli) build command. This macro generates the necessary glue code to instantiate Marine instance under the hood and call the greeting module loaded into it.
 
 After we have our Wasm module and tests in place, we can proceed with `cargo test`.
 
