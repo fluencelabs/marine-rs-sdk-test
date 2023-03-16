@@ -20,7 +20,7 @@ doctest = false
 [dependencies]
 marine-test-macro-impl = { path = "../marine-test-macro-impl", version = "=0.8.2" }
 
-quote = "1.0.21"
+quote = "1.0.26"
 proc-macro2 = "1.0.51"
 proc-macro-error = { version = "1.0.4", default-features = false }
 syn = { version = '1.0.109', features = ['full'] }
