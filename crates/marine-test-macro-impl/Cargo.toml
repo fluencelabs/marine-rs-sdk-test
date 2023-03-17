@@ -18,7 +18,7 @@ fluence-app-service = { version = "0.25.0", features = ["raw-module-api"] }
 marine-it-parser = "0.12.0"
 itertools = "0.10.5"
 darling = "0.14.4"
-quote = "1.0.21"
+quote = "1.0.26"
 proc-macro2 = "1.0.51"
 proc-macro-error = { version = "1.0.4", default-features = false }
 syn = { version = '1.0.109', features = ['full'] }
