@@ -1,6 +1,6 @@
 [package]
 name = "marine-test-macro-impl"
-version = "0.8.2"
+version = "0.9.0"
 edition = "2018"
 description = "Implementation of the `#[marine_test]` macro"
 documentation = "https://docs.rs/fluence/marine-test-macro-impl"
@@ -17,12 +17,12 @@ all-features = true
 fluence-app-service = { version = "0.25.3", features = ["raw-module-api"] }
 marine-it-parser = "0.12.1"
 itertools = "0.10.5"
-darling = "0.14.3"
-quote = "1.0.21"
-proc-macro2 = "1.0.51"
+darling = "0.14.4"
+quote = "1.0.26"
+proc-macro2 = "1.0.52"
 proc-macro-error = { version = "1.0.4", default-features = false }
-syn = { version = '1.0.107', features = ['full'] }
-thiserror = "1.0.38"
+syn = { version = '1.0.109', features = ['full'] }
+thiserror = "1.0.39"
 static_assertions = "1.1.0"
 
 [dev-dependencies]

@@ -44,9 +44,9 @@ pub(crate) fn load_config(
     modules_dir: Option<String>,
     file_path: &Path,
 ) -> TResult<ConfigWrapper> {
-    let config_path_buf = file_path.join(&config_path);
+    let config_path_buf = file_path.join(config_path);
 
-    let marine_config = TomlAppServiceConfig::load(&config_path_buf)?;
+    let marine_config = TomlAppServiceConfig::load(config_path_buf)?;
     let modules_dir = match resolve_modules_dir(&marine_config, modules_dir) {
         Some(modules_dir) => modules_dir,
         None => return Err(TestGeneratorError::ModulesDirUnspecified),

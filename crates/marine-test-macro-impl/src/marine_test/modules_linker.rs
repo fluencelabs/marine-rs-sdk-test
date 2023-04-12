@@ -24,8 +24,8 @@ use static_assertions::const_assert;
 use std::cmp::Ordering;
 use std::collections::HashMap;
 use std::hash::Hasher;
-use std::iter::zip;
 use std::sync::Arc;
+use std::iter::zip;
 
 pub(super) fn link_modules<'modules>(
     modules: impl ExactSizeIterator<Item = (&'modules str, &'modules IModuleInterface)>,
