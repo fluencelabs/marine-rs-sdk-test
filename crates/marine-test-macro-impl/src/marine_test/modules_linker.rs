@@ -24,8 +24,8 @@ use static_assertions::const_assert;
 use std::cmp::Ordering;
 use std::collections::HashMap;
 use std::hash::Hasher;
-use std::rc::Rc;
 use std::iter::zip;
+use std::sync::Arc;
 
 pub(super) fn link_modules<'modules>(
     modules: impl ExactSizeIterator<Item = (&'modules str, &'modules IModuleInterface)>,
@@ -106,12 +106,12 @@ impl PartialEq for ITypeClosed<'_> {
 
 #[derive(Clone)]
 pub struct IRecordTypeClosed<'r> {
-    pub record_type: Rc<IRecordType>,
+    pub record_type: Arc<IRecordType>,
     pub records: &'r IRecordTypes,
 }
 
 impl<'r> IRecordTypeClosed<'r> {
-    fn new(record_type: Rc<IRecordType>, records: &'r IRecordTypes) -> Self {
+    fn new(record_type: Arc<IRecordType>, records: &'r IRecordTypes) -> Self {
         Self {
             record_type,
             records,

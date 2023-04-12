@@ -228,6 +228,7 @@ pub(super) fn generate_marine_test_env_for_build_script(
 
     let marine_test_env = quote! {
         #[allow(dead_code)]
+        #[allow(non_snake_case)]
         pub mod marine_test_env {
             #(#service_definitions)*
         }
