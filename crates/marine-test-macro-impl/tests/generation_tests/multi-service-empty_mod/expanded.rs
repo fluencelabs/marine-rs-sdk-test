@@ -1,5 +1,7 @@
 #[attribute]
 pub mod tests {
+    #[allow(unused)]
+    #[allow(non_snake_case)]
     pub mod marine_test_env {
         pub mod empty_mod {
             pub mod modules {

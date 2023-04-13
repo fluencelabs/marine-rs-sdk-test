@@ -1,5 +1,7 @@
 #[test]
 fn test() {
+    #[allow(unused)]
+    #[allow(non_snake_case)]
     pub mod marine_test_env {
         pub mod empty_func {
             pub mod modules {
