@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.1](https://github.com/fluencelabs/marine-rs-sdk-test/compare/marine-rs-sdk-test-v0.9.0...marine-rs-sdk-test-v0.9.1) (2023-04-13)
+
+
+### Bug Fixes
+
+* remove warnings in marine_test_env + update marine ([#73](https://github.com/fluencelabs/marine-rs-sdk-test/issues/73)) ([c055e6d](https://github.com/fluencelabs/marine-rs-sdk-test/commit/c055e6de90d139e4dffad258af7512ae50483d91))
+
 ## [0.9.0](https://github.com/fluencelabs/marine-rs-sdk-test/compare/marine-rs-sdk-test-v0.8.2...marine-rs-sdk-test-v0.9.0) (2023-03-17)
 
 
