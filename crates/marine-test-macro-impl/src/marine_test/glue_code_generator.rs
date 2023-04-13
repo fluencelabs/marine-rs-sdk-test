@@ -167,6 +167,8 @@ fn generate_test_glue_code_single_service(
         #[test]
         fn #name() {
             // definitions for wasm modules specified in config
+            #[allow(unused)]
+            #[allow(non_snake_case)]
             pub mod marine_test_env {
               #(#module_definitions)*
             }
@@ -201,6 +203,8 @@ fn generate_test_glue_code_multiple_services(
     )?;
 
     let marine_test_env = quote! {
+        #[allow(unused)]
+        #[allow(non_snake_case)]
         pub mod marine_test_env {
             #(#service_definitions)*
         }
@@ -228,6 +232,7 @@ pub(super) fn generate_marine_test_env_for_build_script(
 
     let marine_test_env = quote! {
         #[allow(dead_code)]
+        #[allow(non_snake_case)]
         pub mod marine_test_env {
             #(#service_definitions)*
         }
