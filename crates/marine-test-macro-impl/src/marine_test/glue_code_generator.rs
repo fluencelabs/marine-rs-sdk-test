@@ -131,16 +131,18 @@ fn generate_test_glue_code_single_service(
     service: ServiceDescription,
     test_file_path: PathBuf,
 ) -> TResult<TokenStream> {
+    warn_about_modules_dir(&service);
+
     let func_item = match item {
         syn::Item::Fn(func_item) => func_item,
         _ => return Err(TestGeneratorError::ExpectedFn),
     };
 
-    let config_wrapper =
-        config_utils::load_config(&service.config_path, service.modules_dir, &test_file_path)?;
-    let modules_dir_test_relative = test_file_path.join(&config_wrapper.resolved_modules_dir);
+    let config =
+        config_utils::load_config(&service.config_path, &test_file_path)?;
+
     let module_interfaces =
-        config_utils::collect_modules(&config_wrapper.config, &modules_dir_test_relative)?;
+        config_utils::collect_modules(&config)?;
     let linked_modules = marine_test::modules_linker::link_modules(
         module_interfaces
             .iter()
@@ -160,7 +162,6 @@ fn generate_test_glue_code_single_service(
     let module_ctors = generate_module_ctors(inputs.iter())?;
     let app_service_ctor = token_stream_generator::generate_app_service_ctor(
         &service.config_path,
-        &config_wrapper.resolved_modules_dir,
         &test_file_path,
     )?;
     let glue_code = quote! {
@@ -308,4 +309,14 @@ fn generate_arg_names<'inputs>(
             }
         })
         .collect::<TResult<_>>()
+}
+
+fn warn_about_modules_dir(service: &ServiceDescription) {
+    use colored::Colorize;
+
+    if service.modules_dir.is_some() {
+        println!("{}: {}",
+                 "WARNING".yellow(),
+                 r#""modules_dir" parameter is deprecated. It will not be used by macro. Please specify loading options in config file."#)
+    }
 }

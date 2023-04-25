@@ -16,10 +16,12 @@
 
 use crate::{TResult, TestGeneratorError};
 
+use fluence_app_service::AppServiceConfig;
 use fluence_app_service::TomlAppServiceConfig;
 use marine_it_parser::module_it_interface;
 use marine_it_parser::it_interface::IModuleInterface;
 
+use std::convert::TryInto;
 use std::path::{PathBuf, Path};
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -34,77 +36,45 @@ impl<'m> Module<'m> {
     }
 }
 
-pub(crate) struct ConfigWrapper {
-    pub config: TomlAppServiceConfig,
-    pub resolved_modules_dir: PathBuf,
-}
-
 pub(crate) fn load_config(
     config_path: &str,
-    modules_dir: Option<String>,
     file_path: &Path,
-) -> TResult<ConfigWrapper> {
+) -> TResult<AppServiceConfig> {
     let config_path_buf = file_path.join(config_path);
 
-    let marine_config = TomlAppServiceConfig::load(config_path_buf)?;
-    let modules_dir = match resolve_modules_dir(&marine_config, modules_dir) {
-        Some(modules_dir) => modules_dir,
-        None => return Err(TestGeneratorError::ModulesDirUnspecified),
-    };
+    let marine_config = TomlAppServiceConfig::load(&config_path_buf)
+        .map_err(|e| TestGeneratorError::ConfigLoadError(config_path_buf.clone(), e))?
+        .try_into()
+        .map_err(|e| TestGeneratorError::ConfigLoadError(config_path_buf, e))?;
 
-    Ok(ConfigWrapper {
-        config: marine_config,
-        resolved_modules_dir: modules_dir,
-    })
+    Ok(marine_config)
 }
 
 /// Returns all modules the provided config consists of.
-pub(super) fn collect_modules<'config>(
-    config: &'config TomlAppServiceConfig,
-    modules_dir: &Path,
-) -> TResult<Vec<Module<'config>>> {
-    let module_paths = collect_module_paths(config, modules_dir);
+pub(super) fn collect_modules(
+    config: &AppServiceConfig,
+) -> TResult<Vec<Module>> {
+    let module_paths = collect_module_paths(config)?;
 
     module_paths
         .into_iter()
-        .map(|(name, path)| module_it_interface(path).map(|interface| Module::new(name, interface)))
-        .collect::<Result<Vec<_>, _>>()
-        .map_err(Into::into)
+        .map(|(name, path)| module_it_interface(&path)
+            .map(|interface| Module::new(name, interface))
+            .map_err(|e| TestGeneratorError::ITParserError(path.to_owned(), e))
+        )
+        .collect::<TResult<Vec<_>>>()
 }
 
-fn collect_module_paths<'config>(
-    config: &'config TomlAppServiceConfig,
-    modules_dir: &Path,
-) -> Vec<(&'config str, PathBuf)> {
+fn collect_module_paths(
+    config: &AppServiceConfig,
+) -> TResult<Vec<(&str, PathBuf)>> {
     config
-        .toml_marine_config
-        .module
+        .marine_config
+        .modules_config
         .iter()
-        .map(|m| {
-            let module_file_name = m.file_name.as_ref().unwrap_or(&m.name);
-            let module_file_name = PathBuf::from(module_file_name);
-            // TODO: is it correct to always have .wasm extension?
-            let module_path = modules_dir.join(module_file_name).with_extension("wasm");
-
-            (m.name.as_str(), module_path)
-        })
-        .collect::<Vec<_>>()
-}
-
-/// Tries to determine a dir with compiled Wasm modules according to the following rules:
-///  - if the modules_dir attribute is specified (by user) it will be chosen,
-///  - otherwise if modules_dir is specified in AppService config it will be chosen,
-///  - otherwise None will be returned.
-pub(super) fn resolve_modules_dir(
-    config: &TomlAppServiceConfig,
-    modules_dir: Option<String>,
-) -> Option<PathBuf> {
-    match modules_dir {
-        Some(modules_dir) => Some(PathBuf::from(modules_dir)),
-        None => config
-            .toml_marine_config
-            .modules_dir
-            .as_ref()
-            .map(PathBuf::from),
-    }
+        .map(|m| m.get_path(&config.marine_config.modules_dir)
+            .map(|path| (m.import_name.as_str(), path))
+            .map_err(|e| TestGeneratorError::ModuleResolveError(m.import_name.to_owned(), e))
+        )
+        .collect::<TResult<Vec<_>>>()
 }

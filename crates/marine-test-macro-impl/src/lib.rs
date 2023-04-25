@@ -26,6 +26,8 @@
 #![warn(rust_2018_idioms)]
 #![recursion_limit = "1024"]
 
+extern crate core;
+
 mod attributes;
 mod errors;
 mod marine_test;
