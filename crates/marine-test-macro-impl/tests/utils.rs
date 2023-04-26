@@ -47,6 +47,10 @@ where
     let expanded_item = items_from_file(&expanded_path);
     let marine_item = to_syn_item(marine_token_streams.clone());
 
+    if expanded_item != marine_item {
+        print_outputs(&marine_token_streams, &expanded_path);
+    }
+
     marine_item == expanded_item
 }
 
@@ -92,6 +96,27 @@ where
 
     let expanded_item = items_from_file(&expanded_path);
     let marine_item = to_syn_item(marine_token_streams.clone());
+    if expanded_item != marine_item {
+        print_outputs(&marine_token_streams, &expanded_path);
+    }
 
     marine_item == expanded_item
+}
+
+fn print_outputs<P: AsRef<Path>>(macro_output: &proc_macro2::TokenStream, expanded_path: P) {
+    let actual = format!("{}", &macro_output);
+    let expected_stream = stream_from_file(&expanded_path);
+    let expected = format!("{}", &expected_stream);
+    let mut diff: usize = 0;
+    for i in 0..actual.len() {
+        if actual[i..i + 1] != expected[i..i + 1] {
+            diff = i;
+            break;
+        }
+    }
+    let highlight = " ".repeat(diff) + &"^".repeat(actual.len() - diff);
+
+    println!("actual   : {}", &actual);
+    println!("expected : {}", &expected);
+    println!("highlight: {}", &highlight);
 }

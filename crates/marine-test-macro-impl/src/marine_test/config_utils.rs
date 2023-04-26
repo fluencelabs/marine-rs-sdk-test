@@ -36,14 +36,18 @@ impl<'m> Module<'m> {
     }
 }
 
-pub(crate) fn load_config(
-    config_path: &str,
-    file_path: &Path,
-) -> TResult<AppServiceConfig> {
+pub(crate) fn load_config(config_path: &str, file_path: &Path) -> TResult<AppServiceConfig> {
     let config_path_buf = file_path.join(config_path);
 
-    let marine_config = TomlAppServiceConfig::load(&config_path_buf)
-        .map_err(|e| TestGeneratorError::ConfigLoadError(config_path_buf.clone(), e))?
+    let mut marine_config = TomlAppServiceConfig::load(&config_path_buf)
+        .map_err(|e| TestGeneratorError::ConfigLoadError(config_path_buf.clone(), e))?;
+
+    marine_config.toml_marine_config.base_path = config_path_buf
+        .parent()
+        .map(PathBuf::from)
+        .unwrap_or_default();
+
+    let marine_config = marine_config
         .try_into()
         .map_err(|e| TestGeneratorError::ConfigLoadError(config_path_buf, e))?;
 
@@ -51,30 +55,28 @@ pub(crate) fn load_config(
 }
 
 /// Returns all modules the provided config consists of.
-pub(super) fn collect_modules(
-    config: &AppServiceConfig,
-) -> TResult<Vec<Module>> {
+pub(super) fn collect_modules(config: &AppServiceConfig) -> TResult<Vec<Module<'_>>> {
     let module_paths = collect_module_paths(config)?;
 
     module_paths
         .into_iter()
-        .map(|(name, path)| module_it_interface(&path)
-            .map(|interface| Module::new(name, interface))
-            .map_err(|e| TestGeneratorError::ITParserError(path.to_owned(), e))
-        )
+        .map(|(name, path)| {
+            module_it_interface(&path)
+                .map(|interface| Module::new(name, interface))
+                .map_err(|e| TestGeneratorError::ITParserError(path.to_owned(), e))
+        })
         .collect::<TResult<Vec<_>>>()
 }
 
-fn collect_module_paths(
-    config: &AppServiceConfig,
-) -> TResult<Vec<(&str, PathBuf)>> {
+fn collect_module_paths(config: &AppServiceConfig) -> TResult<Vec<(&str, PathBuf)>> {
     config
         .marine_config
         .modules_config
         .iter()
-        .map(|m| m.get_path(&config.marine_config.modules_dir)
-            .map(|path| (m.import_name.as_str(), path))
-            .map_err(|e| TestGeneratorError::ModuleResolveError(m.import_name.to_owned(), e))
-        )
+        .map(|m| {
+            m.get_path(&config.marine_config.modules_dir)
+                .map(|path| (m.import_name.as_str(), path))
+                .map_err(|e| TestGeneratorError::ModuleResolveError(m.import_name.to_owned(), e))
+        })
         .collect::<TResult<Vec<_>>>()
 }

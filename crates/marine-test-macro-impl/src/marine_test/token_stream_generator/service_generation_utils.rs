@@ -56,11 +56,13 @@ pub(crate) fn generate_app_service_ctor(
 
         let config_path = module_path.join(#config_path);
 
-        let mut __m_generated_marine_config = marine_rs_sdk_test::internal::TomlAppServiceConfig::load(&config_path)
-            .unwrap_or_else(|e| panic!("app service config located at `{:?}` can't be loaded: {}", config_path, e));
+        let mut __m_generated_marine_config = marine_rs_sdk_test::internal::TomlAppServiceConfig::load(&config_path,)
+            .unwrap_or_else(|e| {
+                panic!("app service config located at `{:?}` can't be loaded: {}", config_path, e)
+            } );
         __m_generated_marine_config.service_base_dir = Some(tmp_dir);
 
-        let marine = marine_rs_sdk_test::internal::AppService::new_with_empty_facade(__m_generated_marine_config, service_id, std::collections::HashMap::new())
+        let marine = marine_rs_sdk_test::internal::AppService::new_with_empty_facade(__m_generated_marine_config, service_id, std::collections::HashMap::new(),)
             .unwrap_or_else(|e| panic!("app service can't be created: {}", e));
 
         let marine = std::rc::Rc::new(std::cell::RefCell::new(marine));
@@ -74,8 +76,7 @@ pub(super) fn generate_service_definition(
     linked_facade: &LinkedModule<'_>,
     file_path_for_app_service: &Path,
 ) -> TResult<TokenStream> {
-    let modules =
-        config_utils::collect_modules(&service.config)?;
+    let modules = config_utils::collect_modules(&service.config)?;
     let linked_modules = modules_linker::link_modules(
         modules
             .iter()
@@ -97,10 +98,8 @@ pub(super) fn generate_service_definition(
     let facade_override_ident = new_ident("__facade_override")?;
     let facade_structs = generate_facade_structs(facade, &facade_override_ident)?;
 
-    let app_service_ctor = generate_app_service_ctor(
-        &service.config_path,
-        file_path_for_app_service,
-    )?;
+    let app_service_ctor =
+        generate_app_service_ctor(&service.config_path, file_path_for_app_service)?;
     let modules_type = generate_modules_type(&modules)?;
 
     let service_definition = quote! {

@@ -44,8 +44,7 @@ pub(crate) fn generate_service_definitions(
     let service_modules = services
         .iter()
         .map(|service| {
-            let modules =
-                config_utils::collect_modules(&service.config)?;
+            let modules = config_utils::collect_modules(&service.config)?;
             Ok(modules)
         })
         .collect::<TResult<Vec<Vec<Module<'_>>>>>()?;

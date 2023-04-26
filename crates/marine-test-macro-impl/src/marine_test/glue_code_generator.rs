@@ -138,11 +138,9 @@ fn generate_test_glue_code_single_service(
         _ => return Err(TestGeneratorError::ExpectedFn),
     };
 
-    let config =
-        config_utils::load_config(&service.config_path, &test_file_path)?;
+    let config = config_utils::load_config(&service.config_path, &test_file_path)?;
 
-    let module_interfaces =
-        config_utils::collect_modules(&config)?;
+    let module_interfaces = config_utils::collect_modules(&config)?;
     let linked_modules = marine_test::modules_linker::link_modules(
         module_interfaces
             .iter()
@@ -160,10 +158,8 @@ fn generate_test_glue_code_single_service(
     let inputs = &signature.inputs;
     let arg_names = generate_arg_names(inputs.iter())?;
     let module_ctors = generate_module_ctors(inputs.iter())?;
-    let app_service_ctor = token_stream_generator::generate_app_service_ctor(
-        &service.config_path,
-        &test_file_path,
-    )?;
+    let app_service_ctor =
+        token_stream_generator::generate_app_service_ctor(&service.config_path, &test_file_path)?;
     let glue_code = quote! {
         #[test]
         fn #name() {
@@ -185,7 +181,7 @@ fn generate_test_glue_code_single_service(
                #original_block
             }
 
-            test_func(#(#arg_names,)*)
+            test_func(#(#arg_names),*)
         }
     };
 
@@ -315,8 +311,10 @@ fn warn_about_modules_dir(service: &ServiceDescription) {
     use colored::Colorize;
 
     if service.modules_dir.is_some() {
-        println!("{}: {}",
-                 "WARNING".yellow(),
-                 r#""modules_dir" parameter is deprecated. It will not be used by macro. Please specify loading options in config file."#)
+        println!(
+            "{}: {}",
+            "WARNING".yellow(),
+            r#""modules_dir" parameter is deprecated. It will not be used by macro. Please specify loading options in config file."#
+        )
     }
 }

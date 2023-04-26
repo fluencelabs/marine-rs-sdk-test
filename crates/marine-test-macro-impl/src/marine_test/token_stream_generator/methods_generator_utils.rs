@@ -45,7 +45,7 @@ pub(super) fn generate_module_method(
     let (cp, func_name) = generate_call_parameters(&cp_setting, signature)?;
 
     let module_method = quote! {
-        pub fn #func_name(&mut self, #(#arguments),* #cp) #output_type {
+        pub fn #func_name(&mut self #(,#arguments)* #cp) #output_type {
             #mcall
         }
     };
@@ -65,7 +65,7 @@ pub(super) fn generate_module_method_forward(
     let (cp, func_name) = generate_call_parameters(&cp_setting, signature)?;
 
     let module_method = quote! {
-        pub fn #func_name(&mut self, #(#arguments),* #cp) #output_type {
+        pub fn #func_name(&mut self #(,#arguments)* #cp) #output_type {
             #mcall
         }
     };
@@ -228,13 +228,7 @@ fn generate_call_parameters(
             Ok((TokenStream::new(), func_name))
         }
         CallParametersSettings::UserDefined => {
-            let maybe_comma = if signature.arguments.is_empty() {
-                TokenStream::new()
-            } else {
-                quote! { , }
-            };
-
-            let cp = quote! { #maybe_comma cp: marine_rs_sdk_test::CallParameters };
+            let cp = quote! { , cp: marine_rs_sdk_test::CallParameters, };
             let func_name = format!("{}_cp", signature.name);
             let func_name = new_ident(&func_name)?;
             Ok((cp, func_name))
