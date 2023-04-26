@@ -62,7 +62,7 @@ pub mod tests {
                     }
                     pub struct ModuleInterface {
                         marine: std::rc::Rc<
-                            std::cell::RefCell<marine_rs_sdk_test::internal::AppService>,
+                            std::cell::RefCell<marine_rs_sdk_test::internal::AppService>
                         >,
                     }
                     impl ModuleInterface {
@@ -134,7 +134,7 @@ pub mod tests {
                 }
                 pub struct ModuleInterface {
                     marine:
-                        std::rc::Rc<std::cell::RefCell<marine_rs_sdk_test::internal::AppService>>,
+                        std::rc::Rc<std::cell::RefCell<marine_rs_sdk_test::internal::AppService> >,
                 }
                 impl ModuleInterface {
                     pub fn new(
@@ -158,7 +158,7 @@ pub mod tests {
                 fn new(
                     marine: std::rc::Rc<
                         std::cell::RefCell<marine_rs_sdk_test::internal::AppService>,
-                    >,
+                    >
                 ) -> Self {
                     Self {
                         greeting: modules::greeting::ModuleInterface::new(marine.clone()),
@@ -168,7 +168,7 @@ pub mod tests {
             pub struct ServiceInterface {
                 pub modules: __GeneratedModules,
                 __facade: __facade_override::ModuleInterface,
-                marine: std::rc::Rc<std::cell::RefCell<marine_rs_sdk_test::internal::AppService>>,
+                marine: std::rc::Rc<std::cell::RefCell<marine_rs_sdk_test::internal::AppService>, >
             }
             impl ServiceInterface {
                 pub fn new() -> Self {
@@ -205,7 +205,7 @@ pub mod tests {
                     }
                     let config_path = module_path.join("Config.toml");
                     let mut __m_generated_marine_config =
-                        marine_rs_sdk_test::internal::TomlAppServiceConfig::load(&config_path)
+                        marine_rs_sdk_test::internal::TomlAppServiceConfig::load(&config_path,)
                             .unwrap_or_else(|e| {
                                 panic!(
                                     "app service config located at `{:?}` can't be loaded: {}",
@@ -225,7 +225,7 @@ pub mod tests {
                     Self {
                         marine,
                         modules,
-                        __facade,
+                        __facade
                     }
                 }
             }
