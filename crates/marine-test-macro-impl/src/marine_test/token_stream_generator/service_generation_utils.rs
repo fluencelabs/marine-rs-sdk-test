@@ -31,7 +31,6 @@ pub(crate) fn generate_app_service_ctor(
         let mut module_path = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"));
         let mut file_path = std::path::Path::new(#test_file_path).components();
 
-
         let mut truncated_file_path = Vec::new();
         loop {
             if module_path.ends_with(file_path.as_path()) {
@@ -61,6 +60,10 @@ pub(crate) fn generate_app_service_ctor(
                 panic!("app service config located at `{:?}` can't be loaded: {}", config_path, e)
             } );
         __m_generated_marine_config.service_base_dir = Some(tmp_dir);
+        __m_generated_marine_config.toml_marine_config.base_path = config_path
+        .parent()
+        .map(std::path::PathBuf::from)
+        .unwrap_or_default();
 
         let marine = marine_rs_sdk_test::internal::AppService::new_with_empty_facade(__m_generated_marine_config, service_id, std::collections::HashMap::new(),)
             .unwrap_or_else(|e| panic!("app service can't be created: {}", e));
