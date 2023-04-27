@@ -24,7 +24,6 @@ pub fn test_marine_test_token_streams<FP, EP>(
     marine_path: FP,
     expanded_path: EP,
     config_path: &str,
-    modules_dir: &str,
 ) -> bool
 where
     FP: AsRef<Path>,
@@ -35,7 +34,6 @@ where
     let buf = marine_path.as_ref().to_path_buf();
     let attrs = quote::quote! {
         config_path = #config_path,
-        modules_dir = #modules_dir,
     };
     let marine_token_streams = marine_test_impl(
         attrs,
@@ -56,7 +54,6 @@ where
 
 pub struct TestServiceDescription {
     pub config_path: &'static str,
-    pub modules_dir: &'static str,
     pub name: &'static str,
 }
 
@@ -76,9 +73,8 @@ where
         .iter()
         .map(|desc| {
             let config_path = desc.config_path;
-            let modules_dir = desc.modules_dir;
             let name = syn::parse_str::<syn::Ident>(desc.name)?;
-            Ok(quote::quote! {#name(config_path = #config_path, modules_dir = #modules_dir)})
+            Ok(quote::quote! {#name(config_path = #config_path)})
         })
         .collect::<Result<Vec<_>, syn::Error>>()
         .unwrap_or_else(|e| panic!("failed to parse test arguments due to {}", e));
@@ -96,6 +92,7 @@ where
 
     let expanded_item = items_from_file(&expanded_path);
     let marine_item = to_syn_item(marine_token_streams.clone());
+
     if expanded_item != marine_item {
         print_outputs(&marine_token_streams, &expanded_path);
     }
