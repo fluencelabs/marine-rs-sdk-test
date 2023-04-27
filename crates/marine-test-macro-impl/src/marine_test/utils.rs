@@ -70,4 +70,3 @@ pub(crate) fn warn_about_modules_dir(service: &ServiceDescription) {
         )
     }
 }
-
