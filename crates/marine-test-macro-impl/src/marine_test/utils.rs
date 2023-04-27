@@ -15,6 +15,8 @@
  */
 
 use crate::TResult;
+use crate::ServiceDescription;
+
 use marine_it_parser::it_interface::IRecordTypes;
 use marine_it_parser::it_interface::it::IType;
 
@@ -60,3 +62,12 @@ pub(super) fn itype_to_tokens(itype: &IType, records: &IRecordTypes) -> TResult<
 
     Ok(token_stream)
 }
+
+pub(crate) fn warn_about_modules_dir(service: &ServiceDescription) {
+    if service.modules_dir.is_some() {
+        println!(
+            r#"WARNING: #[marine-test] macro attribute "modules_dir" is deprecated. It will not be used by macro. Please specify loading options in config file."#,
+        )
+    }
+}
+

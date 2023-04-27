@@ -86,6 +86,7 @@ impl ProcessedService {
         name: String,
         file_path: &Path,
     ) -> TResult<Self> {
+        crate::marine_test::utils::warn_about_modules_dir(&service);
         let config_wrapper = load_config(&service.config_path, file_path)?;
 
         Ok(Self {

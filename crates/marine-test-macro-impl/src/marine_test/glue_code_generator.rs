@@ -131,7 +131,7 @@ fn generate_test_glue_code_single_service(
     service: ServiceDescription,
     test_file_path: PathBuf,
 ) -> TResult<TokenStream> {
-    warn_about_modules_dir(&service);
+    marine_test::utils::warn_about_modules_dir(&service);
 
     let func_item = match item {
         syn::Item::Fn(func_item) => func_item,
@@ -305,16 +305,4 @@ fn generate_arg_names<'inputs>(
             }
         })
         .collect::<TResult<_>>()
-}
-
-fn warn_about_modules_dir(service: &ServiceDescription) {
-    use colored::Colorize;
-
-    if service.modules_dir.is_some() {
-        println!(
-            "{}: {}",
-            "WARNING".yellow(),
-            r#""modules_dir" parameter is deprecated. It will not be used by macro. Please specify loading options in config file."#
-        )
-    }
 }
