@@ -26,7 +26,6 @@ fn test_empty_func() {
         "tests/generation_tests/empty_func/marine_test.rs",
         "tests/generation_tests/empty_func/expanded.rs",
         "Config.toml",
-        "artifacts"
     ));
 }
 
@@ -36,7 +35,6 @@ fn test_mounted_binary() {
         "tests/generation_tests/mounted_binary/marine_test.rs",
         "tests/generation_tests/mounted_binary/expanded.rs",
         "Config.toml",
-        "artifacts"
     ));
 }
 
@@ -46,14 +44,12 @@ fn test_multiple_modules() {
         "tests/generation_tests/multiple_modules/marine_test.rs",
         "tests/generation_tests/multiple_modules/expanded.rs",
         "Config.toml",
-        "artifacts"
     ));
 }
 
 #[test]
 fn test_multiservice_single() {
     let descriptions = vec![TestServiceDescription {
-        modules_dir: "empty_func/artifacts",
         config_path: "empty_func/Config.toml",
         name: "empty_func",
     }];
@@ -68,12 +64,10 @@ fn test_multiservice_single() {
 fn test_multiservice_multiple() {
     let descriptions = vec![
         TestServiceDescription {
-            modules_dir: "empty_func/artifacts",
             config_path: "empty_func/Config.toml",
             name: "empty_func",
         },
         TestServiceDescription {
-            modules_dir: "mounted_binary/artifacts",
             config_path: "mounted_binary/Config.toml",
             name: "mounted_binary",
         },
@@ -88,7 +82,6 @@ fn test_multiservice_multiple() {
 #[test]
 fn test_multiservice_empty_mod() {
     let descriptions = vec![TestServiceDescription {
-        modules_dir: "artifacts",
         config_path: "Config.toml",
         name: "empty_mod",
     }];

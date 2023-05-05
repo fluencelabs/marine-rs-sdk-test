@@ -14,14 +14,17 @@
  * limitations under the License.
  */
 
-use crate::attributes::{ServiceDescription};
+use crate::attributes::ServiceDescription;
 use crate::TResult;
 use crate::TestGeneratorError;
-use crate::marine_test::config_utils::{Module, ConfigWrapper, load_config};
-use crate::marine_test::{modules_linker, config_utils};
+use crate::marine_test::config_utils::Module;
+use crate::marine_test::config_utils::load_config;
+use crate::marine_test::modules_linker;
+use crate::marine_test::config_utils;
 use crate::marine_test::modules_linker::LinkedModules;
 use super::service_generation_utils::generate_service_definition;
 
+use fluence_app_service::AppServiceConfig;
 use marine_it_parser::it_interface::IModuleInterface;
 use proc_macro2::TokenStream;
 use itertools::Itertools;
@@ -43,9 +46,7 @@ pub(crate) fn generate_service_definitions(
     let service_modules = services
         .iter()
         .map(|service| {
-            let modules_dir_test_relative = file_path.join(&service.config.resolved_modules_dir);
-            let modules =
-                config_utils::collect_modules(&service.config.config, &modules_dir_test_relative)?;
+            let modules = config_utils::collect_modules(&service.config)?;
             Ok(modules)
         })
         .collect::<TResult<Vec<Vec<Module<'_>>>>>()?;
@@ -57,7 +58,6 @@ pub(crate) fn generate_service_definitions(
             // entry with service.name was added in link_services(...), so unwrap is safe
             generate_service_definition(
                 service,
-                file_path,
                 link_info.get::<str>(&service.name).unwrap(),
                 file_path_for_app_service,
             )
@@ -75,7 +75,7 @@ pub(super) fn get_facace<'modules, 'm>(
 }
 
 pub(super) struct ProcessedService {
-    pub(super) config: ConfigWrapper,
+    pub(super) config: AppServiceConfig,
     pub(super) config_path: String,
     pub(super) name: String,
 }
@@ -86,7 +86,8 @@ impl ProcessedService {
         name: String,
         file_path: &Path,
     ) -> TResult<Self> {
-        let config_wrapper = load_config(&service.config_path, service.modules_dir, file_path)?;
+        crate::marine_test::utils::maybe_warn_about_modules_dir(&service);
+        let config_wrapper = load_config(&service.config_path, file_path)?;
 
         Ok(Self {
             config: config_wrapper,

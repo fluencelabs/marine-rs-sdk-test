@@ -23,6 +23,7 @@ mod service_generation_utils;
 use crate::marine_test::config_utils::Module;
 use crate::marine_test::modules_linker::{LinkedModule, LinkedModules, UseDescription};
 use crate::marine_test::utils;
+use crate::marine_test::utils::new_ident;
 use crate::TResult;
 
 pub(super) use service_generator::generate_service_definitions;
@@ -30,7 +31,6 @@ pub(super) use service_generation_utils::generate_app_service_ctor;
 
 use proc_macro2::TokenStream;
 use quote::quote;
-use crate::marine_test::utils::new_ident;
 
 /// Generates definitions of modules and records of this modules.
 /// F.e. for the greeting service the following definitions would be generated:
@@ -101,11 +101,11 @@ fn generate_module_definition(
         #(#module_records)*
 
         pub struct #struct_ident {
-            marine: std::rc::Rc<std::cell::RefCell<marine_rs_sdk_test::internal::AppService>, >,
+            marine: std::rc::Rc<std::cell::RefCell<marine_rs_sdk_test::internal::AppService> >,
         }
 
         impl #struct_ident {
-            pub fn new(marine: std::rc::Rc<std::cell::RefCell<marine_rs_sdk_test::internal::AppService>, >) -> Self {
+            pub fn new(marine: std::rc::Rc<std::cell::RefCell<marine_rs_sdk_test::internal::AppService>, >,) -> Self {
                 Self { marine }
             }
         }

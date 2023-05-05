@@ -14,13 +14,8 @@ use itertools::Itertools;
 
 pub(crate) fn generate_app_service_ctor(
     config_path: &str,
-    modules_dir: &Path,
     test_file_path: &Path,
 ) -> TResult<TokenStream> {
-    let modules_dir = modules_dir
-        .to_str()
-        .ok_or_else(|| TestGeneratorError::InvalidUTF8Path(modules_dir.to_path_buf()))?;
-
     let test_file_path = test_file_path
         .to_str()
         .ok_or_else(|| TestGeneratorError::InvalidUTF8Path(test_file_path.to_path_buf()))?;
@@ -59,15 +54,18 @@ pub(crate) fn generate_app_service_ctor(
         }
 
         let config_path = module_path.join(#config_path);
-        let modules_dir = module_path.join(#modules_dir);
-        let modules_dir = modules_dir.to_str().expect("modules_dir contains invalid UTF8 string");
 
-        let mut __m_generated_marine_config = marine_rs_sdk_test::internal::TomlAppServiceConfig::load(&config_path)
-            .unwrap_or_else(|e| panic!("app service config located at `{:?}` can't be loaded: {}", config_path, e));
+        let mut __m_generated_marine_config = marine_rs_sdk_test::internal::TomlAppServiceConfig::load(&config_path,)
+            .unwrap_or_else(|e| {
+                panic!("app service config located at `{:?}` can't be loaded: {}", config_path, e)
+            } );
         __m_generated_marine_config.service_base_dir = Some(tmp_dir);
-        __m_generated_marine_config.toml_marine_config.modules_dir = Some(std::path::PathBuf::from(modules_dir));
+        __m_generated_marine_config.toml_marine_config.base_path = config_path
+        .parent()
+        .map(std::path::PathBuf::from)
+        .unwrap_or_default();
 
-        let marine = marine_rs_sdk_test::internal::AppService::new_with_empty_facade(__m_generated_marine_config, service_id, std::collections::HashMap::new())
+        let marine = marine_rs_sdk_test::internal::AppService::new_with_empty_facade(__m_generated_marine_config, service_id, std::collections::HashMap::new(),)
             .unwrap_or_else(|e| panic!("app service can't be created: {}", e));
 
         let marine = std::rc::Rc::new(std::cell::RefCell::new(marine));
@@ -78,13 +76,10 @@ pub(crate) fn generate_app_service_ctor(
 
 pub(super) fn generate_service_definition(
     service: &ProcessedService,
-    test_file_path: &Path,
     linked_facade: &LinkedModule<'_>,
     file_path_for_app_service: &Path,
 ) -> TResult<TokenStream> {
-    let modules_dir_test_relative = test_file_path.join(&service.config.resolved_modules_dir);
-    let modules =
-        config_utils::collect_modules(&service.config.config, &modules_dir_test_relative)?;
+    let modules = config_utils::collect_modules(&service.config)?;
     let linked_modules = modules_linker::link_modules(
         modules
             .iter()
@@ -106,11 +101,8 @@ pub(super) fn generate_service_definition(
     let facade_override_ident = new_ident("__facade_override")?;
     let facade_structs = generate_facade_structs(facade, &facade_override_ident)?;
 
-    let app_service_ctor = generate_app_service_ctor(
-        &service.config_path,
-        &service.config.resolved_modules_dir,
-        file_path_for_app_service,
-    )?;
+    let app_service_ctor =
+        generate_app_service_ctor(&service.config_path, file_path_for_app_service)?;
     let modules_type = generate_modules_type(&modules)?;
 
     let service_definition = quote! {

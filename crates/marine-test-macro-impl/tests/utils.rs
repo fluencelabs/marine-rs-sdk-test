@@ -18,13 +18,14 @@ use marine_test_macro_impl::marine_test_impl;
 
 use marine_macro_testing_utils::{items_from_file, stream_from_file, to_syn_item};
 
+use std::cmp::min;
+use std::cmp::max;
 use std::path::Path;
 
 pub fn test_marine_test_token_streams<FP, EP>(
     marine_path: FP,
     expanded_path: EP,
     config_path: &str,
-    modules_dir: &str,
 ) -> bool
 where
     FP: AsRef<Path>,
@@ -35,7 +36,6 @@ where
     let buf = marine_path.as_ref().to_path_buf();
     let attrs = quote::quote! {
         config_path = #config_path,
-        modules_dir = #modules_dir,
     };
     let marine_token_streams = marine_test_impl(
         attrs,
@@ -47,12 +47,15 @@ where
     let expanded_item = items_from_file(&expanded_path);
     let marine_item = to_syn_item(marine_token_streams.clone());
 
+    if expanded_item != marine_item {
+        print_token_streams_with_diff(&marine_token_streams, &expanded_path);
+    }
+
     marine_item == expanded_item
 }
 
 pub struct TestServiceDescription {
     pub config_path: &'static str,
-    pub modules_dir: &'static str,
     pub name: &'static str,
 }
 
@@ -72,9 +75,8 @@ where
         .iter()
         .map(|desc| {
             let config_path = desc.config_path;
-            let modules_dir = desc.modules_dir;
             let name = syn::parse_str::<syn::Ident>(desc.name)?;
-            Ok(quote::quote! {#name(config_path = #config_path, modules_dir = #modules_dir)})
+            Ok(quote::quote! {#name(config_path = #config_path)})
         })
         .collect::<Result<Vec<_>, syn::Error>>()
         .unwrap_or_else(|e| panic!("failed to parse test arguments due to {}", e));
@@ -93,5 +95,32 @@ where
     let expanded_item = items_from_file(&expanded_path);
     let marine_item = to_syn_item(marine_token_streams.clone());
 
+    if expanded_item != marine_item {
+        print_token_streams_with_diff(&marine_token_streams, &expanded_path);
+    }
+
     marine_item == expanded_item
+}
+
+fn print_token_streams_with_diff<P: AsRef<Path>>(
+    macro_output: &proc_macro2::TokenStream,
+    expanded_path: P,
+) {
+    let actual = macro_output.to_string();
+    let expected = stream_from_file(&expanded_path).to_string();
+    let min_len = min(actual.len(), expected.len());
+    let max_len = max(actual.len(), expected.len());
+    let mut first_diff_index: usize = min_len;
+    for i in 0..min_len {
+        // String does not implement index access, but implements range access
+        if actual[i..i + 1] != expected[i..i + 1] {
+            first_diff_index = i;
+            break;
+        }
+    }
+    let diff = " ".repeat(first_diff_index) + &"^".repeat(max_len - first_diff_index);
+
+    println!("actual  : {}", &actual);
+    println!("expected: {}", &expected);
+    println!("diff    : {}", &diff);
 }

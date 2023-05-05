@@ -19,10 +19,10 @@ marine-it-parser = "0.12.1"
 itertools = "0.10.5"
 darling = "0.14.4"
 quote = "1.0.26"
-proc-macro2 = "1.0.52"
+proc-macro2 = "1.0.56"
 proc-macro-error = { version = "1.0.4", default-features = false }
 syn = { version = '1.0.109', features = ['full'] }
-thiserror = "1.0.39"
+thiserror = "1.0.40"
 static_assertions = "1.1.0"
 
 [dev-dependencies]
