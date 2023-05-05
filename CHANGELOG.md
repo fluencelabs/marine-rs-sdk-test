@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.10.0](https://github.com/fluencelabs/marine-rs-sdk-test/compare/marine-rs-sdk-test-v0.9.1...marine-rs-sdk-test-v0.10.0) (2023-05-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* use only config to load modules, deprecate modules_dir parameter ([#78](https://github.com/fluencelabs/marine-rs-sdk-test/issues/78))
+
+### Features
+
+* use only config to load modules, deprecate modules_dir parameter ([#78](https://github.com/fluencelabs/marine-rs-sdk-test/issues/78)) ([b57fcc4](https://github.com/fluencelabs/marine-rs-sdk-test/commit/b57fcc4ab1b06396e3c3f28a8aa3a7157c98a71e))
+
 ## [0.9.1](https://github.com/fluencelabs/marine-rs-sdk-test/compare/marine-rs-sdk-test-v0.9.0...marine-rs-sdk-test-v0.9.1) (2023-04-13)
 
 
