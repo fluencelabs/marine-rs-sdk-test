@@ -15,6 +15,8 @@
  */
 
 use darling::FromMeta;
+use darling::ast::NestedMeta;
+
 use std::collections::HashMap;
 
 /// Describes attributes of `marine_test` macro.
@@ -35,7 +37,7 @@ pub struct ServiceDescription {
 }
 
 impl FromMeta for MTestAttributes {
-    fn from_list(items: &[syn::NestedMeta]) -> darling::Result<Self> {
+    fn from_list(items: &[NestedMeta]) -> darling::Result<Self> {
         let single_service = ServiceDescription::from_list(items);
         let multiple_services = HashMap::<String, ServiceDescription>::from_list(items);
         match (single_service, multiple_services) {
