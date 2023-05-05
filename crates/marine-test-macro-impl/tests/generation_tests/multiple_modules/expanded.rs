@@ -8,7 +8,7 @@ fn empty_string() {
                 Clone,
                 Debug,
                 marine_rs_sdk_test :: internal :: serde :: Serialize,
-                marine_rs_sdk_test :: internal :: serde :: Deserialize
+                marine_rs_sdk_test :: internal :: serde :: Deserialize,
             )]
             #[serde(crate = "marine_rs_sdk_test::internal::serde")]
             pub struct CallParameters {
@@ -17,55 +17,55 @@ fn empty_string() {
                 pub service_creator_peer_id: String,
                 pub host_id: String,
                 pub particle_id: String,
-                pub tetraplets: Vec<Vec<SecurityTetraplet>>
+                pub tetraplets: Vec<Vec<SecurityTetraplet>>,
             }
             #[derive(
                 Clone,
                 Debug,
                 marine_rs_sdk_test :: internal :: serde :: Serialize,
-                marine_rs_sdk_test :: internal :: serde :: Deserialize
+                marine_rs_sdk_test :: internal :: serde :: Deserialize,
             )]
             #[serde(crate = "marine_rs_sdk_test::internal::serde")]
             pub struct MountedBinaryResult {
                 pub ret_code: i32,
                 pub error: String,
                 pub stdout: Vec<u8>,
-                pub stderr: Vec<u8>
+                pub stderr: Vec<u8>,
             }
             #[derive(
                 Clone,
                 Debug,
                 marine_rs_sdk_test :: internal :: serde :: Serialize,
-                marine_rs_sdk_test :: internal :: serde :: Deserialize
+                marine_rs_sdk_test :: internal :: serde :: Deserialize,
             )]
             #[serde(crate = "marine_rs_sdk_test::internal::serde")]
             pub struct MountedBinaryStringResult {
                 pub ret_code: i32,
                 pub error: String,
                 pub stdout: String,
-                pub stderr: String
+                pub stderr: String,
             }
             #[derive(
                 Clone,
                 Debug,
                 marine_rs_sdk_test :: internal :: serde :: Serialize,
-                marine_rs_sdk_test :: internal :: serde :: Deserialize
+                marine_rs_sdk_test :: internal :: serde :: Deserialize,
             )]
             #[serde(crate = "marine_rs_sdk_test::internal::serde")]
             pub struct SecurityTetraplet {
                 pub peer_pk: String,
                 pub service_id: String,
                 pub function_name: String,
-                pub json_path: String
+                pub json_path: String,
             }
             pub struct ModuleInterface {
-                marine: std::rc::Rc<std::cell::RefCell<marine_rs_sdk_test::internal::AppService>, >,
+                marine: std::rc::Rc<std::cell::RefCell<marine_rs_sdk_test::internal::AppService>>,
             }
             impl ModuleInterface {
                 pub fn new(
                     marine: std::rc::Rc<
                         std::cell::RefCell<marine_rs_sdk_test::internal::AppService>,
-                    >
+                    >,
                 ) -> Self {
                     Self { marine }
                 }
@@ -87,7 +87,7 @@ fn empty_string() {
                 pub fn greeting_cp(
                     &mut self,
                     name: String,
-                    cp: marine_rs_sdk_test::CallParameters
+                    cp: marine_rs_sdk_test::CallParameters,
                 ) -> String {
                     let arguments = marine_rs_sdk_test::internal::serde_json::json!([name]);
                     let result = self
@@ -107,19 +107,19 @@ fn empty_string() {
             pub use super::greeting::CallParameters;
             pub use super::greeting::SecurityTetraplet;
             pub struct ModuleInterface {
-                marine: std::rc::Rc<std::cell::RefCell<marine_rs_sdk_test::internal::AppService>, >,
+                marine: std::rc::Rc<std::cell::RefCell<marine_rs_sdk_test::internal::AppService>>,
             }
             impl ModuleInterface {
                 pub fn new(
                     marine: std::rc::Rc<
                         std::cell::RefCell<marine_rs_sdk_test::internal::AppService>,
-                    >
+                    >,
                 ) -> Self {
                     Self { marine }
                 }
             }
             impl ModuleInterface {
-                pub fn call_parameters(&mut self, ) -> String {
+                pub fn call_parameters(&mut self) -> String {
                     let arguments = marine_rs_sdk_test::internal::serde_json::json!([]);
                     let result = self
                         .marine
@@ -139,7 +139,7 @@ fn empty_string() {
                 }
                 pub fn call_parameters_cp(
                     &mut self,
-                    cp: marine_rs_sdk_test::CallParameters
+                    cp: marine_rs_sdk_test::CallParameters,
                 ) -> String {
                     let arguments = marine_rs_sdk_test::internal::serde_json::json!([]);
                     let result = self
@@ -153,7 +153,7 @@ fn empty_string() {
                             .expect("the default deserializer shouldn't fail");
                     result
                 }
-                pub fn return_string(&mut self,) -> String {
+                pub fn return_string(&mut self) -> String {
                     let arguments = marine_rs_sdk_test::internal::serde_json::json!([]);
                     let result = self
                         .marine
@@ -173,7 +173,7 @@ fn empty_string() {
                 }
                 pub fn return_string_cp(
                     &mut self,
-                    cp: marine_rs_sdk_test::CallParameters
+                    cp: marine_rs_sdk_test::CallParameters,
                 ) -> String {
                     let arguments = marine_rs_sdk_test::internal::serde_json::json!([]);
                     let result = self
@@ -187,7 +187,7 @@ fn empty_string() {
                             .expect("the default deserializer shouldn't fail");
                     result
                 }
-                pub fn test_array_refs(&mut self, ) -> Vec<String> {
+                pub fn test_array_refs(&mut self) -> Vec<String> {
                     let arguments = marine_rs_sdk_test::internal::serde_json::json!([]);
                     let result = self
                         .marine
@@ -207,7 +207,7 @@ fn empty_string() {
                 }
                 pub fn test_array_refs_cp(
                     &mut self,
-                    cp: marine_rs_sdk_test::CallParameters
+                    cp: marine_rs_sdk_test::CallParameters,
                 ) -> Vec<String> {
                     let arguments = marine_rs_sdk_test::internal::serde_json::json!([]);
                     let result = self
@@ -230,7 +230,8 @@ fn empty_string() {
     let tmp_dir = tmp_dir.to_string_lossy().to_string();
     std::fs::create_dir(&tmp_dir).expect("can't create a directory for service in tmp");
     let mut module_path = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"));
-    let mut file_path = std::path::Path::new("tests/generation_tests/multiple_modules").components();
+    let mut file_path =
+        std::path::Path::new("tests/generation_tests/multiple_modules").components();
     let mut truncated_file_path = Vec::new();
     loop {
         if module_path.ends_with(file_path.as_path()) {
@@ -252,25 +253,24 @@ fn empty_string() {
         module_path.push(path);
     }
     let config_path = module_path.join("Config.toml");
-    let modules_dir = module_path.join("artifacts");
-    let modules_dir = modules_dir
-        .to_str()
-        .expect("modules_dir contains invalid UTF8 string");
     let mut __m_generated_marine_config = marine_rs_sdk_test::internal::TomlAppServiceConfig::load(
-        &config_path
+        &config_path,
     )
-    .unwrap_or_else(|e|
+    .unwrap_or_else(|e| {
         panic!(
             "app service config located at `{:?}` can't be loaded: {}",
             config_path, e
         )
-    );
+    });
     __m_generated_marine_config.service_base_dir = Some(tmp_dir);
-    __m_generated_marine_config.toml_marine_config.modules_dir = Some(std::path::PathBuf::from(modules_dir));
+    __m_generated_marine_config.toml_marine_config.base_path = config_path
+        .parent()
+        .map(std::path::PathBuf::from)
+        .unwrap_or_default();
     let marine = marine_rs_sdk_test::internal::AppService::new_with_empty_facade(
         __m_generated_marine_config,
         service_id,
-        std::collections::HashMap::new()
+        std::collections::HashMap::new(),
     )
     .unwrap_or_else(|e| panic!("app service can't be created: {}", e));
     let marine = std::rc::Rc::new(std::cell::RefCell::new(marine));
@@ -310,5 +310,5 @@ fn empty_string() {
             assert_eq!(actual, expected);
         }
     }
-    test_func(greeting_m, call_parameters_m, )
+    test_func(greeting_m, call_parameters_m)
 }

@@ -42,10 +42,10 @@ pub(super) fn generate_records(
                     let fields = prepare_field(record.record_type.fields.iter(), record.records)?;
 
                     Ok(quote! {
-                        #[derive(Clone, Debug, marine_rs_sdk_test::internal::serde::Serialize, marine_rs_sdk_test::internal::serde::Deserialize)]
+                        #[derive(Clone, Debug, marine_rs_sdk_test::internal::serde::Serialize, marine_rs_sdk_test::internal::serde::Deserialize,)]
                         #[serde(crate = "marine_rs_sdk_test::internal::serde")]
                         pub struct #record_name_ident {
-                            #(pub #fields),*
+                            #(pub #fields,)*
                         }
                     })
                 }

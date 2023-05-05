@@ -131,16 +131,16 @@ fn generate_test_glue_code_single_service(
     service: ServiceDescription,
     test_file_path: PathBuf,
 ) -> TResult<TokenStream> {
+    marine_test::utils::maybe_warn_about_modules_dir(&service);
+
     let func_item = match item {
         syn::Item::Fn(func_item) => func_item,
         _ => return Err(TestGeneratorError::ExpectedFn),
     };
 
-    let config_wrapper =
-        config_utils::load_config(&service.config_path, service.modules_dir, &test_file_path)?;
-    let modules_dir_test_relative = test_file_path.join(&config_wrapper.resolved_modules_dir);
-    let module_interfaces =
-        config_utils::collect_modules(&config_wrapper.config, &modules_dir_test_relative)?;
+    let config = config_utils::load_config(&service.config_path, &test_file_path)?;
+
+    let module_interfaces = config_utils::collect_modules(&config)?;
     let linked_modules = marine_test::modules_linker::link_modules(
         module_interfaces
             .iter()
@@ -158,11 +158,8 @@ fn generate_test_glue_code_single_service(
     let inputs = &signature.inputs;
     let arg_names = generate_arg_names(inputs.iter())?;
     let module_ctors = generate_module_ctors(inputs.iter())?;
-    let app_service_ctor = token_stream_generator::generate_app_service_ctor(
-        &service.config_path,
-        &config_wrapper.resolved_modules_dir,
-        &test_file_path,
-    )?;
+    let app_service_ctor =
+        token_stream_generator::generate_app_service_ctor(&service.config_path, &test_file_path)?;
     let glue_code = quote! {
         #[test]
         fn #name() {
@@ -184,7 +181,7 @@ fn generate_test_glue_code_single_service(
                #original_block
             }
 
-            test_func(#(#arg_names,)*)
+            test_func(#(#arg_names),*)
         }
     };
 
