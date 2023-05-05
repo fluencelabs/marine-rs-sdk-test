@@ -18,6 +18,8 @@ use marine_test_macro_impl::marine_test_impl;
 
 use marine_macro_testing_utils::{items_from_file, stream_from_file, to_syn_item};
 
+use std::cmp::min;
+use std::cmp::max;
 use std::path::Path;
 
 pub fn test_marine_test_token_streams<FP, EP>(
@@ -46,7 +48,7 @@ where
     let marine_item = to_syn_item(marine_token_streams.clone());
 
     if expanded_item != marine_item {
-        print_outputs(&marine_token_streams, &expanded_path);
+        print_token_streams_with_diff(&marine_token_streams, &expanded_path);
     }
 
     marine_item == expanded_item
@@ -94,26 +96,31 @@ where
     let marine_item = to_syn_item(marine_token_streams.clone());
 
     if expanded_item != marine_item {
-        print_outputs(&marine_token_streams, &expanded_path);
+        print_token_streams_with_diff(&marine_token_streams, &expanded_path);
     }
 
     marine_item == expanded_item
 }
 
-fn print_outputs<P: AsRef<Path>>(macro_output: &proc_macro2::TokenStream, expanded_path: P) {
-    let actual = format!("{}", &macro_output);
-    let expected_stream = stream_from_file(&expanded_path);
-    let expected = format!("{}", &expected_stream);
-    let mut diff: usize = 0;
-    for i in 0..actual.len() {
+fn print_token_streams_with_diff<P: AsRef<Path>>(
+    macro_output: &proc_macro2::TokenStream,
+    expanded_path: P,
+) {
+    let actual = macro_output.to_string();
+    let expected = stream_from_file(&expanded_path).to_string();
+    let min_len = min(actual.len(), expected.len());
+    let max_len = max(actual.len(), expected.len());
+    let mut first_diff_index: usize = min_len;
+    for i in 0..min_len {
+        // String does not implement index access, but implements range access
         if actual[i..i + 1] != expected[i..i + 1] {
-            diff = i;
+            first_diff_index = i;
             break;
         }
     }
-    let highlight = " ".repeat(diff) + &"^".repeat(actual.len() - diff);
+    let diff = " ".repeat(first_diff_index) + &"^".repeat(max_len - first_diff_index);
 
-    println!("actual   : {}", &actual);
-    println!("expected : {}", &expected);
-    println!("highlight: {}", &highlight);
+    println!("actual  : {}", &actual);
+    println!("expected: {}", &expected);
+    println!("diff    : {}", &diff);
 }

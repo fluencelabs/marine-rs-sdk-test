@@ -131,7 +131,7 @@ fn generate_test_glue_code_single_service(
     service: ServiceDescription,
     test_file_path: PathBuf,
 ) -> TResult<TokenStream> {
-    marine_test::utils::warn_about_modules_dir(&service);
+    marine_test::utils::maybe_warn_about_modules_dir(&service);
 
     let func_item = match item {
         syn::Item::Fn(func_item) => func_item,
