@@ -1,5 +1,5 @@
 [package]
-name = "multiservice-marine-test"
+name = "multi-service-example"
 version = "0.1.0"
 authors = ["Fluence Labs"]
 edition = "2021"

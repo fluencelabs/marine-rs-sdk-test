@@ -1,5 +1,5 @@
 [package]
-name = "wasm-greeting"
+name = "single-service-example"
 version = "0.1.0"
 authors = ["Fluence Labs"]
 description = "The greeting module for the Fluence network"

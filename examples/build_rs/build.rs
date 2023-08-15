@@ -5,7 +5,7 @@ fn main() {
         "greeting".to_string(),
         ServiceDescription {
             config_path: "Config.toml".to_string(),
-            modules_dir: Some("artifacts".to_string()),
+            modules_dir: None,
         },
     )];
 
