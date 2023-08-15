@@ -73,6 +73,10 @@ jobs:
         with:
           dependencies: ${{ inputs.cargo-dependencies }}
 
+      - name: Build examples
+        working-directory: examples
+        run: build.sh
+
       - name: Run cargo check
         run: cargo check -v --all-features
 
@@ -81,10 +85,6 @@ jobs:
 
       - name: Run cargo clippy
         run: cargo clippy -Z unstable-options --all
-
-      - name: Build examples
-        working-directory: examples
-        run: build.sh
 
       - name: Test examples
         run: cargo test -p single-service-example -p multi-service-example -p build-rs-example
