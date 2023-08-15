@@ -30,13 +30,13 @@ pub fn greeting(name: String) -> String {
 mod tests {
     use marine_rs_sdk_test::marine_test;
 
-    #[marine_test(config_path = "../Config.toml", modules_dir = "../artifacts")]
+    #[marine_test(config_path = "../Config.toml")]
     fn empty_string(greeting: marine_test_env::greeting::ModuleInterface) {
         let actual = greeting.greeting(String::new());
         assert_eq!(actual, "Hi, ");
     }
 
-    #[marine_test(config_path = "../Config.toml", modules_dir = "../artifacts")]
+    #[marine_test(config_path = "../Config.toml")]
     fn non_empty_string(greeting: marine_test_env::greeting::ModuleInterface) {
         let actual = greeting.greeting("name".to_string());
         assert_eq!(actual, "Hi, name");

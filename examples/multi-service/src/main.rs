@@ -4,14 +4,8 @@ fn main() {}
 mod tests {
     use marine_rs_sdk_test::marine_test;
     #[marine_test(
-        producer(
-            config_path = "../producer/Config.toml",
-            modules_dir = "../producer/artifacts"
-        ),
-        consumer(
-            config_path = "../consumer/Config.toml",
-            modules_dir = "../consumer/artifacts"
-        )
+        producer(config_path = "../producer/Config.toml"),
+        consumer(config_path = "../consumer/Config.toml")
     )]
     fn test() {
         let mut producer = marine_test_env::producer::ServiceInterface::new();
