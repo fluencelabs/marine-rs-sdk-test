@@ -51,11 +51,31 @@ jobs:
       - name: Setup Rust toolchain
         uses: actions-rust-lang/setup-rust-toolchain@v1
 
+      - name: Download marine artifact
+        id: marine
+        uses: actions/download-artifact@v3
+        continue-on-error: true
+        with:
+          name: marine
+          path: ~/.local/bin
+
+      - name: Make marine executable
+        if: steps.marine.outcome == 'success'
+        run: chmod +x ~/.local/bin/marine
+
+      - name: Setup marine
+        if: steps.marine.outcome == 'failure'
+        uses: fluencelabs/setup-marine@v1
+
       - name: Set dependencies
         if: inputs.cargo-dependencies != ''
         uses: fluencelabs/github-actions/cargo-set-dependency@main
         with:
           dependencies: ${{ inputs.cargo-dependencies }}
+
+      - name: Build examples
+        working-directory: examples
+        run: build.sh
 
       - name: Run cargo check
         run: cargo check -v --all-features
@@ -65,6 +85,9 @@ jobs:
 
       - name: Run cargo clippy
         run: cargo clippy -Z unstable-options --all
+
+      - name: Test examples
+        run: cargo test -p single-service-example -p multi-service-example -p build-rs-example
 
       - name: Run rustfmt
         uses: actions-rust-lang/rustfmt@v1

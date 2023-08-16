@@ -1,0 +1,18 @@
+[package]
+name = "single-service-example"
+version = "0.1.0"
+authors = ["Fluence Labs"]
+description = "The greeting module for the Fluence network"
+repository = "https://github.com/fluencelabs/marine/tree/master/examples/greeting"
+edition = "2021"
+publish = false
+
+[[bin]]
+name = "greeting"
+path = "src/main.rs"
+
+[dependencies]
+marine-rs-sdk = "0.8.1"
+
+[dev-dependencies]
+marine-rs-sdk-test = { path = "../.." }
