@@ -64,7 +64,7 @@ jobs:
 
       - name: Build examples
         working-directory: examples
-        run: build.sh
+        run: ./build.sh
 
       - name: Run cargo check
         run: cargo check -v --all-features
