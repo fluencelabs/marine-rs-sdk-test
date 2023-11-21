@@ -37,4 +37,6 @@ members = [
     "examples/build_rs",
     "examples/single-service",
     "examples/multi-service",
+    "examples/multi-service/consumer",
+    "examples/multi-service/producer",
 ]

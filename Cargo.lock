@@ -251,6 +251,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "consumer"
+version = "0.1.0"
+dependencies = [
+ "marine-rs-sdk",
+]
+
+[[package]]
 name = "core-foundation-sys"
 version = "0.8.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1524,6 +1531,13 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "18fb31db3f9bddb2ea821cde30a9f70117e3f119938b5ee630b7403aa6e2ead9"
 dependencies = [
  "unicode-ident",
+]
+
+[[package]]
+name = "producer"
+version = "0.1.0"
+dependencies = [
+ "marine-rs-sdk",
 ]
 
 [[package]]
