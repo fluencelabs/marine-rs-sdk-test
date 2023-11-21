@@ -1,12 +1,5 @@
 # Changelog
 
-## [0.11.1](https://github.com/fluencelabs/marine-rs-sdk-test/compare/marine-rs-sdk-test-v0.11.0...marine-rs-sdk-test-v0.11.1) (2023-11-21)
-
-
-### Features
-
-* **deps:** update rust crate proc-macro2 to 1.0.69 [[#84](https://github.com/fluencelabs/marine-rs-sdk-test/issues/84)](https://github.com/fluencelabs/marine-rs-sdk-test/pull/84) ([fd6b6c0](https://github.com/fluencelabs/marine-rs-sdk-test/commit/fd6b6c0d52e787f5c443c826e3573b4b088d6271))
-
 ## [0.11.0](https://github.com/fluencelabs/marine-rs-sdk-test/compare/marine-rs-sdk-test-v0.10.2...marine-rs-sdk-test-v0.11.0) (2023-10-24)
 
 
