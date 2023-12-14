@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.12.0](https://github.com/fluencelabs/marine-rs-sdk-test/compare/marine-rs-sdk-test-v0.11.1...marine-rs-sdk-test-v0.12.0) (2023-12-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** update to marine runtime with memory limits ([#98](https://github.com/fluencelabs/marine-rs-sdk-test/issues/98))
+
+### Features
+
+* **deps:** update to marine runtime with memory limits ([#98](https://github.com/fluencelabs/marine-rs-sdk-test/issues/98)) ([f772635](https://github.com/fluencelabs/marine-rs-sdk-test/commit/f772635ccc24f81d1e82da733324e98eebd454c7))
+
 ## [0.11.1](https://github.com/fluencelabs/marine-rs-sdk-test/compare/marine-rs-sdk-test-v0.11.0...marine-rs-sdk-test-v0.11.1) (2023-11-21)
 
 
