@@ -1,6 +1,6 @@
 [package]
 name = "marine-test-macro"
-version = "0.11.1"
+version = "0.12.0"
 edition = "2018"
 description = "Definition of the `#[marine_test]` macro"
 documentation = "https://docs.rs/fluence/marine-test-macro"
@@ -18,7 +18,7 @@ proc-macro = true
 doctest = false
 
 [dependencies]
-marine-test-macro-impl = { path = "../marine-test-macro-impl", version = "=0.11.1" }
+marine-test-macro-impl = { path = "../marine-test-macro-impl", version = "=0.12.0" }
 
 quote = "1.0.26"
 proc-macro2 = "1.0.69"

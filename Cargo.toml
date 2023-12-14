@@ -1,6 +1,6 @@
 [package]
 name = "marine-rs-sdk-test"
-version = "0.11.1"
+version = "0.12.0"
 description = "Backend SDK that allows testing modules for the Marine runtime"
 documentation = "https://docs.rs/marine-rs-sdk-test"
 repository = "https://github.com/fluencelabs/marine-rs-sdk-test"
@@ -21,8 +21,8 @@ doctest = false
 trybuild = "1.0"
 
 [dependencies]
-marine-test-macro = { path = "crates/marine-test-macro", version = "=0.11.1" }
-marine-build-rs-generator = { path = "crates/marine-build-rs-generator", version = "=0.11.1" }
+marine-test-macro = { path = "crates/marine-test-macro", version = "=0.12.0" }
+marine-build-rs-generator = { path = "crates/marine-build-rs-generator", version = "=0.12.0" }
 fluence-app-service = { version = "0.31.0", features = ["raw-module-api"] }
 
 serde = { version = "1.0.162", features = ["derive"] }
