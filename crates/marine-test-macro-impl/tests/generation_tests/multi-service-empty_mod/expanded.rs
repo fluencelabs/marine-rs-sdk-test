@@ -2,6 +2,7 @@
 pub mod tests {
     #[allow(unused)]
     #[allow(non_snake_case)]
+    #[allow(unused_imports)]
     pub mod marine_test_env {
         pub mod empty_mod {
             pub mod modules {
