@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.13.0](https://github.com/fluencelabs/marine-rs-sdk-test/compare/marine-rs-sdk-test-v0.12.1...marine-rs-sdk-test-v0.13.0) (2024-02-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* update marine-rs-sdk to 0.12.0 and marine, support worker_id in CallParameters ([#113](https://github.com/fluencelabs/marine-rs-sdk-test/issues/113))
+
+### Features
+
+* update marine-rs-sdk to 0.12.0 and marine, support worker_id in CallParameters ([#113](https://github.com/fluencelabs/marine-rs-sdk-test/issues/113)) ([3d0b62b](https://github.com/fluencelabs/marine-rs-sdk-test/commit/3d0b62bc93e2484dc6b1f33c2fa3a2acc66932f6))
+
 ## [0.12.1](https://github.com/fluencelabs/marine-rs-sdk-test/compare/marine-rs-sdk-test-v0.12.0...marine-rs-sdk-test-v0.12.1) (2023-12-20)
 
 
