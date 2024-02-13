@@ -1,6 +1,6 @@
 [package]
 name = "single-service-example"
-version = "0.12.0"
+version = "0.12.1"
 authors = ["Fluence Labs"]
 description = "The greeting module for the Fluence network"
 repository = "https://github.com/fluencelabs/marine/tree/master/examples/greeting"

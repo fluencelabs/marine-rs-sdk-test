@@ -2,6 +2,7 @@
 fn empty_string() {
     #[allow(unused)]
     #[allow(non_snake_case)]
+    #[allow(unused_imports)]
     pub mod marine_test_env {
         pub mod greeting {
             #[derive(

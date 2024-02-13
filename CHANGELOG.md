@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.1](https://github.com/fluencelabs/marine-rs-sdk-test/compare/marine-rs-sdk-test-v0.12.0...marine-rs-sdk-test-v0.12.1) (2023-12-20)
+
+
+### Bug Fixes
+
+* allow unused imports in marine-test-env ([#111](https://github.com/fluencelabs/marine-rs-sdk-test/issues/111)) ([05321fe](https://github.com/fluencelabs/marine-rs-sdk-test/commit/05321fe7b0e09fd95f2b190e08a10fb278f83779))
+
 ## [0.12.0](https://github.com/fluencelabs/marine-rs-sdk-test/compare/marine-rs-sdk-test-v0.11.1...marine-rs-sdk-test-v0.12.0) (2023-12-14)
 
 
