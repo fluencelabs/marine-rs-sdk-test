@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.14.0](https://github.com/fluencelabs/marine-rs-sdk-test/compare/marine-rs-sdk-test-v0.13.0...marine-rs-sdk-test-v0.14.0) (2024-02-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update marine-rs-sdk and fluence-app-service to support __marine_host_api_v2 ([#115](https://github.com/fluencelabs/marine-rs-sdk-test/issues/115))
+
+### Features
+
+* update marine-rs-sdk and fluence-app-service to support __marine_host_api_v2 ([#115](https://github.com/fluencelabs/marine-rs-sdk-test/issues/115)) ([7d61884](https://github.com/fluencelabs/marine-rs-sdk-test/commit/7d6188418832cbae14623f687fc03d577fcad191))
+
 ## [0.13.0](https://github.com/fluencelabs/marine-rs-sdk-test/compare/marine-rs-sdk-test-v0.12.1...marine-rs-sdk-test-v0.13.0) (2024-02-13)
 
 
