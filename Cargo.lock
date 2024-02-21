@@ -1355,9 +1355,9 @@ dependencies = [
 
 [[package]]
 name = "marine-macro-testing-utils"
-version = "0.1.0"
+version = "0.14.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1c7b78534db4804dab7e439ae93fc2478bb298a97819bbc50002187ef02f2df5"
+checksum = "eaa6e72c3bcab02a4f4a124d08861e9129eb3b375d699f236c756f531997f981"
 dependencies = [
  "proc-macro2",
  "quote",
