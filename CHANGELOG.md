@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.15.0](https://github.com/fluencelabs/marine-rs-sdk-test/compare/marine-rs-sdk-test-v0.14.0...marine-rs-sdk-test-v0.15.0) (2024-02-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* update sdk and marine ([#117](https://github.com/fluencelabs/marine-rs-sdk-test/issues/117))
+
+### Features
+
+* update sdk and marine ([#117](https://github.com/fluencelabs/marine-rs-sdk-test/issues/117)) ([467cc1c](https://github.com/fluencelabs/marine-rs-sdk-test/commit/467cc1c1ef3e5abd42670c686022f3b2c688c5c3))
+
 ## [0.14.0](https://github.com/fluencelabs/marine-rs-sdk-test/compare/marine-rs-sdk-test-v0.13.0...marine-rs-sdk-test-v0.14.0) (2024-02-20)
 
 
