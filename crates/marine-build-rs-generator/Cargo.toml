@@ -1,6 +1,6 @@
 [package]
 name = "marine-build-rs-generator"
-version = "0.14.0"
+version = "0.15.0"
 edition = "2018"
 description = "Tools for generating marine_test_env in build scripts"
 documentation = "https://docs.rs/marine-build-rs-generator"
@@ -17,4 +17,4 @@ all-features = true
 doctest = false
 
 [dependencies]
-marine-test-macro-impl = { path = "../marine-test-macro-impl", version = "=0.14.0" }
+marine-test-macro-impl = { path = "../marine-test-macro-impl", version = "=0.15.0" }
