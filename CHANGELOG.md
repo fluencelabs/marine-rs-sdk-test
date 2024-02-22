@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.16.0](https://github.com/fluencelabs/marine-rs-sdk-test/compare/marine-rs-sdk-test-v0.15.0...marine-rs-sdk-test-v0.16.0) (2024-02-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* update to fluence-app-service 0.35.0 ([#121](https://github.com/fluencelabs/marine-rs-sdk-test/issues/121))
+
+### Features
+
+* update to fluence-app-service 0.35.0 ([#121](https://github.com/fluencelabs/marine-rs-sdk-test/issues/121)) ([eebcac8](https://github.com/fluencelabs/marine-rs-sdk-test/commit/eebcac8223df06d6d27ec1a3605286c27448bfac))
+
+
+### Bug Fixes
+
+* expose ParticleParameters ([#119](https://github.com/fluencelabs/marine-rs-sdk-test/issues/119)) ([ba2c87b](https://github.com/fluencelabs/marine-rs-sdk-test/commit/ba2c87bab6e4b0adee6f30143050b228a6bef923))
+
 ## [0.15.0](https://github.com/fluencelabs/marine-rs-sdk-test/compare/marine-rs-sdk-test-v0.14.0...marine-rs-sdk-test-v0.15.0) (2024-02-21)
 
 
