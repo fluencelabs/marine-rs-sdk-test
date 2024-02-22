@@ -34,6 +34,7 @@ pub use marine_build_rs_generator::ServiceDescription;
 pub use marine_build_rs_generator::include_test_env;
 
 pub use fluence_app_service::CallParameters;
+pub use fluence_app_service::ParticleParameters;
 pub use fluence_app_service::SecurityTetraplet;
 
 /// These API functions are intended for internal usage in generated code.
