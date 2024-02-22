@@ -21,13 +21,7 @@ pub(crate) fn generate_app_service_ctor(
         .ok_or_else(|| TestGeneratorError::InvalidUTF8Path(test_file_path.to_path_buf()))?;
 
     let service_ctor = quote! {
-        let tmp_dir = std::env::temp_dir();
         let service_id = marine_rs_sdk_test::internal::Uuid::new_v4().to_string();
-
-        let tmp_dir = tmp_dir.join(&service_id);
-        let tmp_dir = tmp_dir.to_string_lossy().to_string();
-        std::fs::create_dir(&tmp_dir).expect("can't create a directory for service in tmp");
-
         let mut module_path = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"));
         let mut file_path = std::path::Path::new(#test_file_path).components();
 
@@ -59,7 +53,6 @@ pub(crate) fn generate_app_service_ctor(
             .unwrap_or_else(|e| {
                 panic!("app service config located at `{:?}` can't be loaded: {}", config_path, e)
             } );
-        __m_generated_marine_config.service_base_dir = Some(tmp_dir);
         __m_generated_marine_config.toml_marine_config.base_path = config_path
         .parent()
         .map(std::path::PathBuf::from)
