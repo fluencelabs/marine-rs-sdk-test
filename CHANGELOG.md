@@ -1,12 +1,5 @@
 # Changelog
 
-## [0.16.1](https://github.com/fluencelabs/marine-rs-sdk-test/compare/marine-rs-sdk-test-v0.16.0...marine-rs-sdk-test-v0.16.1) (2024-02-29)
-
-
-### Bug Fixes
-
-* **runtime:** use marine with mounted binaries for v3 fix ([#122](https://github.com/fluencelabs/marine-rs-sdk-test/issues/122)) ([4fc5932](https://github.com/fluencelabs/marine-rs-sdk-test/commit/4fc59325f6ddf8ecbdffbf565832547b266d7624))
-
 ## [0.16.0](https://github.com/fluencelabs/marine-rs-sdk-test/compare/marine-rs-sdk-test-v0.15.0...marine-rs-sdk-test-v0.16.0) (2024-02-22)
 
 
