@@ -1,5 +1,5 @@
 /*
- * Fluence Marine Rust test SDK
+ * Marine Rust test SDK
  *
  * Copyright (C) 2024 Fluence DAO
  *
