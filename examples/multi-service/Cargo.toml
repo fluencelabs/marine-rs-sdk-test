@@ -1,6 +1,6 @@
 [package]
 name = "multi-service-example"
-version = "0.16.1"
+version = "0.17.0"
 authors = ["Fluence Labs"]
 edition = "2021"
 publish = false
