@@ -14,7 +14,7 @@ license = "AGPL-3.0-only"
 all-features = true
 
 [dependencies]
-fluence-app-service = { version = "0.35.1", features = ["raw-module-api"] }
+fluence-app-service = { version = "0.36.0", features = ["raw-module-api"] }
 marine-it-parser = "0.15.0"
 itertools = "0.10.5"
 darling = "0.20.1"
