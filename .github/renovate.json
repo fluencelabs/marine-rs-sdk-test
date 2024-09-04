@@ -1,39 +1,7 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base",
-    ":semanticCommitTypeAll(chore)"
+    "github>fluencelabs/renovate",
+    "github>fluencelabs/renovate:cargo"
   ],
-  "enabledManagers": ["cargo", "github-actions"],
-  "schedule": "every weekend",
-  "packageRules": [
-    {
-      "matchManagers": ["cargo"],
-      "matchPackagePatterns": [
-        "fluence-.*",
-        "avm-server",
-        "air-intepreter-wasm",
-        "marine-.*"
-      ],
-      "semanticCommitType": "fix",
-      "semanticCommitScope": "deps",
-      "schedule": "at any time"
-    },
-    {
-      "matchPackagePatterns": ["^@wasmer", "^wasmer", "^wasm-bindgen"],
-      "enabled": false
-    },
-    {
-      "matchDepTypes": ["devDependencies"],
-      "prPriority": -1
-    },
-    {
-      "matchUpdateTypes": ["major"],
-      "prConcurrentLimit": 1
-    },
-    {
-      "matchManagers": ["github-actions"],
-      "prPriority": 1
-    }
-  ]
+  "enabledManagers": ["cargo"]
 }
